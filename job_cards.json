@@ -1,0 +1,81 @@
+[
+  {
+    "jobCardId": "JC-2024-8841",
+    "accessKey": "cc1005",
+    "customer": {
+      "name": "Syed Farhan",
+      "mobile": "9849112233",
+      "email": "farhan.syed@gmail.com",
+      "vehicleModel": "KTM Duke 390",
+      "regNumber": "TS 09 EA 1234"
+    },
+    "partnerId": "partner_001",
+    "partnerName": "Harish CC Motocrafts Hub",
+    "leadTechnician": "Shahrukh Master Technician",
+    "bay": "Bay 02 - Precision Engine Overhaul Bay",
+    "workBayStream": {
+      "streamId": "STREAM-BAY02-CAM1",
+      "status": "LIVE",
+      "resolution": "1080p @ 60FPS (Ultra-Low Latency WebRTC)",
+      "latencyMs": 142,
+      "cameraViews": [
+        {
+          "id": "cam_overhead",
+          "label": "Engine Overhead Cam",
+          "active": true
+        },
+        {
+          "id": "cam_macro",
+          "label": "Cylinder Head Macro Cam",
+          "active": false
+        },
+        {
+          "id": "cam_bay",
+          "label": "Wide Bay Cam",
+          "active": false
+        }
+      ]
+    },
+    "stages": [
+      {
+        "step": 1,
+        "title": "Vehicle Inspection & OBD-II Full Scan",
+        "status": "completed",
+        "timestamp": "Today 10:15 AM",
+        "notes": "OBD-II ECU scan clear. Spark plug gap inspected at 0.8mm."
+      },
+      {
+        "step": 2,
+        "title": "Engine Disassembly & Valve Inspection",
+        "status": "in_progress",
+        "progressPercent": 65,
+        "timestamp": "Today 11:30 AM",
+        "notes": "Cam chain tensioner removed. Checking intake valve clearance."
+      },
+      {
+        "step": 3,
+        "title": "Valve Lapping, Bore Honing & Part Replacement",
+        "status": "pending",
+        "progressPercent": 0,
+        "timestamp": "Estimated 02:00 PM",
+        "notes": "New Viton stem seals and piston rings staged for installation."
+      },
+      {
+        "step": 4,
+        "title": "Final Washing, Teflon Polish & Dyno Road Test",
+        "status": "pending",
+        "progressPercent": 0,
+        "timestamp": "Estimated 04:30 PM",
+        "notes": "High-pressure foam wash and 5 KM electronic diagnostic test run."
+      }
+    ],
+    "customerNotes": [
+      {
+        "id": "cn_01",
+        "text": "Brake pad sound check kar lena bhaiyya front disc mein se",
+        "timestamp": "11:42 AM",
+        "status": "Acknowledged by Technician"
+      }
+    ]
+  }
+]

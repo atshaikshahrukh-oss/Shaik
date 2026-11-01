@@ -1,0 +1,175 @@
+[
+  {
+    "code": "P0300",
+    "system": "Ignition & Combustion Chamber",
+    "title": "Random / Multiple Cylinder Misfire Detected",
+    "category": "both",
+    "displacement": "100cc - 15,000cc",
+    "symptoms": [
+      "Engine vibration",
+      "Sudden power dip under load",
+      "Fuel smell in exhaust",
+      "Flashing MIL"
+    ],
+    "rootCauses": [
+      "Fouled spark plug or incorrect electrode gap (< 0.7mm)",
+      "High-Tension (HT) coil insulation breakdown under high thermal load",
+      "Fuel injector atomization spray nozzle clog",
+      "Low cylinder compression due to tight valve tappet clearance"
+    ],
+    "multimeterSpecs": {
+      "htCoilPrimaryResistance": "0.8 to 1.5 Ohms @ 20\u00b0C",
+      "htCoilSecondaryResistance": "8.5k to 14.5k Ohms",
+      "injectorResistance": "11.8 to 14.2 Ohms",
+      "supplyVoltage": "12.4V to 14.2V DC (Ignition ON)"
+    },
+    "wiringPinout": {
+      "ecuIgnitionDriver": "Pin 14 (Orange/Black wire)",
+      "ground": "Chassis Ground (Brown/White wire)",
+      "signalReturn": "Pin 28 (Yellow/Green wire)"
+    },
+    "canBusTelemetry": {
+      "frameId": "0x18FEE000",
+      "pid": "0x0C (Engine RPM variance > 80 RPM between crank cycles)",
+      "protocol": "ISO 15765-4 (CAN 500kbps)"
+    },
+    "assemblyGuide": "Check intake/exhaust valve lash: Intake 0.08mm - 0.12mm, Exhaust 0.12mm - 0.16mm. Torque spark plug to 14-16 Nm.",
+    "master25YearAdvice": "Ustad advice: Pehle spark plug nikaal kar color dekho. Agar black carbon hai toh lean misfire nahi rich hai; agar white dry hai toh intake manifold rubber O-ring se secondary air leak check karo."
+  },
+  {
+    "code": "P0171",
+    "system": "Fuel Trim & Air Metering",
+    "title": "System Too Lean (Bank 1)",
+    "category": "both",
+    "displacement": "125cc - 8,000cc",
+    "symptoms": [
+      "Hesitation on throttle twist/press",
+      "Surging idle",
+      "Elevated engine cylinder temperature"
+    ],
+    "rootCauses": [
+      "Manifold Absolute Pressure (MAP) / Mass Air Flow (MAF) sensor contaminated",
+      "Cracked throttle body intake boot / vacuum leak",
+      "Weak fuel pump delivery (< 2.8 Bar on 2W, < 3.8 Bar on 4W)",
+      "Upstream Oxygen Sensor (O2) biased lean"
+    ],
+    "multimeterSpecs": {
+      "mapSensorOutput": "0.8V to 1.2V DC at idle (Vacuum ~40 kPa)",
+      "o2SensorVoltage": "0.1V to 0.9V fluctuating 8-10 times in 10 seconds",
+      "fuelPumpCurrentDraw": "1.8A to 2.6A DC steady"
+    },
+    "wiringPinout": {
+      "map5VReference": "Pin 5 (Red/White wire)",
+      "mapSignal": "Pin 19 (Green/Black wire)",
+      "sensorGround": "Pin 22 (Black/Blue wire)"
+    },
+    "canBusTelemetry": {
+      "frameId": "0x7E8",
+      "pid": "0x06 (Short Term Fuel Trim > +22%)",
+      "protocol": "SAE J1939 / ISO 14229"
+    },
+    "assemblyGuide": "Inspect throttle rubber insulator for hairline fissures. Pressure test fuel rail with analogue gauge before replacing sensor.",
+    "master25YearAdvice": "Throttle body ke vacuum pipe par brake cleaner spray karke engine RPM observe karo. Agar spray marte hi RPM bada, toh wahi se vacuum leak ho rahi hai!"
+  },
+  {
+    "code": "P0420",
+    "system": "Exhaust & Emissions Control",
+    "title": "Catalytic Converter System Efficiency Below Threshold (Bank 1)",
+    "category": "both",
+    "displacement": "150cc - 6,000cc",
+    "symptoms": [
+      "Check engine lamp on",
+      "Slight sluggish high-end acceleration",
+      "Sulphur/rotten egg odor from silencer"
+    ],
+    "rootCauses": [
+      "Downstream O2 sensor mimicking upstream sensor wave (exhaust core disintegrated)",
+      "Exhaust header manifold gasket leak drawing outside ambient oxygen",
+      "Unburnt fuel contamination burning inside the cat honeycomb matrix"
+    ],
+    "multimeterSpecs": {
+      "downstreamO2Sensor": "Steady 0.55V - 0.70V DC at 2500 RPM (No ripple)",
+      "heaterCircuitResistance": "4.2 to 8.0 Ohms @ ambient 25\u00b0C"
+    },
+    "wiringPinout": {
+      "o2SensorHeater12V": "Relay Switched 12V (Red/Yellow wire)",
+      "heaterControlECU": "Pin 36 (Brown/Orange wire)",
+      "o2SignalHigh": "Pin 11 (Blue/White wire)"
+    },
+    "canBusTelemetry": {
+      "frameId": "0x7E0",
+      "pid": "0x15 (Downstream O2 Voltage matching 0x14 Upstream)",
+      "protocol": "ISO 15765-4"
+    },
+    "assemblyGuide": "Thermal gun inspection: Cat inlet temperature must be at least 30\u00b0C to 50\u00b0C COOLER than outlet. If outlet is cooler, converter is clogged or inert.",
+    "master25YearAdvice": "Direct cat converter change mat karo! Pehle downstream O2 heater circuit ka ground wire check karo, kai baar silencer ke paas heat se wire brittle ho jata hai."
+  },
+  {
+    "code": "P0106",
+    "system": "Intake Manifold & Air Induction",
+    "title": "MAP / Barometric Pressure Sensor Range / Performance Issue",
+    "category": "both",
+    "displacement": "100cc - 12,000cc",
+    "symptoms": [
+      "Hard cold start",
+      "Black smoke on hard acceleration",
+      "Engine hunting at idle"
+    ],
+    "rootCauses": [
+      "Carbon oil sludge blocking MAP sensor vacuum port nipple",
+      "Sensor ground wire resistance > 0.5 Ohms",
+      "EGR valve stuck partially open contaminating fresh charge"
+    ],
+    "multimeterSpecs": {
+      "baroReference": "4.0V to 4.2V DC @ sea level / Hyderabad (600m ~ 3.8V)",
+      "sensorGroundVoltageDrop": "< 0.05V DC",
+      "supplyVoltage": "5.00V \u00b1 0.05V DC"
+    },
+    "wiringPinout": {
+      "5V_Vref": "Pin 8 (White/Red)",
+      "MAP_Sig": "Pin 21 (Green/Yellow)",
+      "Sig_GND": "Pin 17 (Black/Brown)"
+    },
+    "canBusTelemetry": {
+      "frameId": "0x18F00400",
+      "pid": "0x0B (Intake Manifold Absolute Pressure)",
+      "protocol": "SAE J1939"
+    },
+    "assemblyGuide": "Clean sensor only using dedicated MAF/electronic contact cleaner. Never poke needle or metal pick into the silicone diaphragm orifice.",
+    "master25YearAdvice": "KTM aur Royal Enfield 650 mein airbox ke breather pipe se oil vapor aake MAP sensor ko ganda karta hai. Airbox drain screw khol ke tel saaf karo pehle."
+  },
+  {
+    "code": "P0700",
+    "system": "Transmission & CVT Management",
+    "title": "Transmission Control System Malfunction / CVT Slip Warning",
+    "category": "both",
+    "displacement": "110cc - 5,000cc",
+    "symptoms": [
+      "High RPM without proportionate road speed",
+      "Jerky take-off",
+      "CVT belt screeching or limp home mode"
+    ],
+    "rootCauses": [
+      "CVT primary/secondary variator roller flat spots",
+      "Worn drive belt width below wear limit (< 18.5mm on scooters)",
+      "Transmission fluid temperature sensor out of calibration",
+      "Shift solenoid valve 'A' circuit stuck"
+    ],
+    "multimeterSpecs": {
+      "tftSensorResistance": "2.2k to 2.7k Ohms @ 20\u00b0C, 250 to 350 Ohms @ 80\u00b0C",
+      "solenoidResistance": "12.0 to 16.0 Ohms"
+    },
+    "wiringPinout": {
+      "tcmCanHigh": "Pin 6 (Blue/White twisted pair)",
+      "tcmCanLow": "Pin 14 (White/Blue twisted pair)",
+      "solenoidPower": "Pin 3 (Black/Red)"
+    },
+    "canBusTelemetry": {
+      "frameId": "0x18F00503",
+      "pid": "0x02 (Speed ratio mismatch: Engine RPM vs Wheel Speed > 18%)",
+      "protocol": "ISO 14229"
+    },
+    "assemblyGuide": "Degrease variator faces with acetone. Torque CVT clutch bell nut to 45-50 Nm (2W) using spanner holder. Never lubricate variator ramp sliders with standard grease.",
+    "master25YearAdvice": "Activa ya Jupiter mein agar pickup mar raha hai aur awaz aa rahi hai, toh variator bushing check karo. Agar usme play aa gaya toh belt tirchi chalegi aur jaldi toot jayegi."
+  }
+]

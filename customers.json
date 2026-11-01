@@ -1,0 +1,78 @@
+[
+  {
+    "id": "cust_101",
+    "name": "Syed Farhan",
+    "mobile": "+91 9849112233",
+    "email": "farhan.syed@gmail.com",
+    "vehicleType": "2w",
+    "vehicleModel": "KTM Duke 390",
+    "regNumber": "TS 09 EA 1234",
+    "currentKm": 20400,
+    "lastServiceDate": "2024-08-15",
+    "lastServiceKm": 18500,
+    "lastWorkDone": [
+      "Motul 300V 15W50 Full Synthetic Oil Change",
+      "KTM OEM Oil Filter & O-Ring Replacement",
+      "Front Brembo Brake Pad Replacement",
+      "Radiator Coolant Flush & De-aerate"
+    ],
+    "warrantyStatus": {
+      "type": "General Service 30-Day Guarantee",
+      "validUntil": "2024-09-15",
+      "isActive": false,
+      "notes": "Service interval reached: 1,900 KM elapsed since last maintenance (Recommended interval: 1,800 - 2,000 KM)."
+    },
+    "servicePitch": "Aapka last service 15 August ko 18,500 KM par hua tha. Aaj 20,400 KM ho chuke hain. Aapka 1,900 KM maintenance interval ho gaya hai! Engine protection ke liye oil and filter checkup zaroori hai."
+  },
+  {
+    "id": "cust_102",
+    "name": "Dr. Ananya Rao",
+    "mobile": "+91 9123445566",
+    "email": "ananya.rao@apollo.org",
+    "vehicleType": "4w",
+    "vehicleModel": "Hyundai Creta 1.5 SX(O)",
+    "regNumber": "TS 08 FG 5541",
+    "currentKm": 34200,
+    "lastServiceDate": "2024-09-28",
+    "lastServiceKm": 33500,
+    "lastWorkDone": [
+      "Stage-3 Engine Rebuild & Cylinder Bore Honing",
+      "Crankshaft Micropolish & New Main Bearings",
+      "Intake & Exhaust Valve Lapping with New Viton Stem Seals",
+      "Synthetic Break-In Oil Refill (5W-30)"
+    ],
+    "warrantyStatus": {
+      "type": "1-Year Engine Overhaul Warranty",
+      "validUntil": "2025-09-28",
+      "isActive": true,
+      "firstServiceDue": "Between 34,000 KM to 34,250 KM (Due Now!)",
+      "notes": "MANDATORY FIRST SERVICE REQUIRED NOW (700 KM run since overhaul). Engine oil and metal flush needed to maintain 1-year warranty."
+    },
+    "servicePitch": "Doctor sahiba, aapki Creta ka engine overhaul 33,500 KM par hua tha. Ab gadi 700 KM chal chuki hai. CC Motocrafts strict warranty rule ke hisab se 500-750 KM first checkup zaroori hai taaki aapka 1-year engine warranty safe rahe!"
+  },
+  {
+    "id": "cust_103",
+    "name": "Karthik Varma",
+    "mobile": "+91 9700123456",
+    "email": "karthik.varma@techmahindra.com",
+    "vehicleType": "2w",
+    "vehicleModel": "Honda Activa 6G H-Smart",
+    "regNumber": "TS 07 HK 9088",
+    "currentKm": 12100,
+    "lastServiceDate": "2024-10-10",
+    "lastServiceKm": 11800,
+    "lastWorkDone": [
+      "CVT Variator Overhaul & Slider Cleaning",
+      "Bando Drive Belt Replacement",
+      "Air Filter Clean & Carb/Injector Flush",
+      "Castrol ActiBond 10W30 Engine & Gear Oil Refill"
+    ],
+    "warrantyStatus": {
+      "type": "General Service 30-Day Guarantee",
+      "validUntil": "2024-11-10",
+      "isActive": true,
+      "notes": "Under active 30-day workmanship guarantee until Nov 10, 2024."
+    },
+    "servicePitch": "Karthik ji, aapka Activa 6G active 30-day service warranty mein hai. Koi bhi minor vibration ya idle issue ho toh complimentary inspection available hai."
+  }
+]

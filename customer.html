@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CC MOTOCRAFTS | Customer App • Track My Gadi & Instant Booking</title>
+  <meta name="description" content="Customer mobile app for live vehicle telemetry, 60 FPS bay camera, job card tracking, and 1-click WhatsApp booking.">
+  <meta name="theme-color" content="#00e5ff">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      --font-mono: 'SF Mono', Consolas, 'Courier New', monospace;
+      --theme-primary: #00e5ff;
+      --theme-primary-glow: rgba(0, 229, 255, 0.4);
+      --bg-dark-base: #060b13;
+      --bg-card: rgba(11, 20, 34, 0.85);
+      --bg-card-border: rgba(0, 229, 255, 0.25);
+      --text-main: #f0f6fc;
+      --text-muted: #8b9bb4;
+      --gold: #ffb300;
+      --danger: #ff3366;
+      --success: #00e676;
+      --warning: #ff9100;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-dark-base);
+      color: var(--text-main);
+      line-height: 1.5;
+      background-image: radial-gradient(circle at 15% 20%, rgba(0, 229, 255, 0.08) 0%, transparent 40%),
+                        radial-gradient(circle at 85% 75%, rgba(255, 145, 0, 0.05) 0%, transparent 45%);
+      padding-bottom: 70px;
+    }
+    .header {
+      display: flex; justify-content: space-between; align-items: center; padding: 12px 18px;
+      background: rgba(6, 11, 19, 0.95); border-bottom: 1px solid var(--bg-card-border);
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+    }
+    .logo { font-size: 15px; font-weight: 900; letter-spacing: 1px; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .btn-cyber {
+      background: rgba(0, 229, 255, 0.08); border: 1px solid var(--theme-primary); color: var(--theme-primary);
+      padding: 7px 12px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;
+    }
+    .btn-cyber:hover { background: rgba(0, 229, 255, 0.2); }
+    .btn-cyber-solid {
+      background: var(--theme-primary); border: 1px solid var(--theme-primary); color: #000;
+      padding: 7px 12px; border-radius: 6px; font-size: 11.5px; font-weight: 800; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px; transition: all 0.2s ease;
+    }
+    .container { max-width: 900px; margin: 0 auto; padding: 16px; }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--bg-card-border); border-radius: 10px;
+      padding: 18px; margin-bottom: 18px;
+    }
+    .form-input {
+      width: 100%; background: rgba(3, 7, 13, 0.85); border: 1px solid var(--bg-card-border);
+      color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 13px; margin-top: 4px;
+    }
+    .modal-overlay {
+      position: fixed; inset: 0; background: rgba(3, 7, 13, 0.85); backdrop-filter: blur(12px);
+      z-index: 2000; display: none; align-items: center; justify-content: center; padding: 16px;
+    }
+    .modal-overlay.active { display: flex; }
+    .cyber-modal {
+      background: #09111c; border: 1px solid var(--bg-card-border); border-radius: 14px;
+      width: 100%; max-width: 500px; padding: 24px; position: relative;
+    }
+    .modal-close-btn { position: absolute; top: 12px; right: 14px; background: transparent; border: none; color: var(--text-muted); font-size: 20px; cursor: pointer; }
+    .stage-badge {
+      display: inline-flex; align-items: center; gap: 6px; padding: 4px 8px; border-radius: 4px;
+      font-size: 11px; font-family: var(--font-mono); font-weight: 700;
+    }
+    .stage-done { background: rgba(0, 230, 118, 0.15); color: var(--success); border: 1px solid var(--success); }
+    .stage-active { background: rgba(0, 229, 255, 0.2); color: var(--theme-primary); border: 1px solid var(--theme-primary); }
+    .stage-pending { background: rgba(255, 255, 255, 0.05); color: var(--text-muted); border: 1px solid rgba(255, 255, 255, 0.1); }
+  </style>
+</head>
+<body>
+
+  <!-- Top App Navigation -->
+  <header class="header">
+    <a href="index.html" class="logo">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--theme-primary); box-shadow:0 0 10px var(--theme-primary);"></span>
+      CC MOTOCRAFTS <span style="font-size:10px; background:rgba(0,229,255,0.15); border:1px solid var(--theme-primary); padding:2px 6px; border-radius:3px; color:var(--theme-primary);">CUSTOMER APP</span>
+    </a>
+    <div style="display: flex; gap: 8px;">
+      <button class="btn-cyber" onclick="triggerPwaInstall()" style="color:var(--success); border-color:var(--success);">
+        📲 Install App
+      </button>
+      <a href="https://wa.me/918333007351?text=Hello%20CC%20Motocrafts%2C%20I%20need%20vehicle%20service" target="_blank" class="btn-cyber-solid" style="background:#25D366; border-color:#25D366; color:#000;">
+        WhatsApp
+      </a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- PWA Install Banner -->
+    <div style="background: linear-gradient(90deg, rgba(0,229,255,0.12), rgba(0,230,118,0.12)); border: 1px solid var(--theme-primary); border-radius: 8px; padding: 12px 16px; margin-bottom: 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+      <div>
+        <strong style="color: #fff; font-size: 13px;">📲 Install CC Motocrafts on your Mobile Screen</strong>
+        <p style="font-size: 11.5px; color: var(--text-muted);">0-Second quick launch • Track your bike/car anytime • Works offline</p>
+      </div>
+      <button class="btn-cyber-solid" onclick="triggerPwaInstall()" style="padding: 6px 12px; font-size: 11px;">
+        Add to Home Screen
+      </button>
+    </div>
+
+    <!-- Section 1: Track My Gadi (Order Trolley) -->
+    <div class="card" style="border: 2px solid var(--gold);">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <div style="display: flex; align-items: center; gap: 8px;">
+          <span style="font-size: 22px;">🛒</span>
+          <div>
+            <h3 style="font-size: 17px; color: var(--gold); margin: 0;">Track My Gadi (Live Work Bay)</h3>
+            <small style="color: var(--text-muted); font-size: 11px;">Enter vehicle registration & return passcode to unlock live camera</small>
+          </div>
+        </div>
+        <span style="font-size: 10px; font-family: var(--font-mono); color: var(--gold); border: 1px solid var(--gold); padding: 2px 6px; border-radius: 3px;">
+          SECURE LIVE STREAM
+        </span>
+      </div>
+
+      <div style="display: grid; grid-template-columns: 1fr 1fr auto; gap: 8px; margin-bottom: 12px;">
+        <input type="text" id="custRegInput" class="form-input" placeholder="e.g. TS 09 EA 1234" value="TS 09 EA 1234">
+        <input type="password" id="custPassInput" class="form-input" placeholder="Enter Return Passcode (e.g. cc1005)">
+        <button class="btn-cyber-solid" onclick="trackCustomerGadi()" style="background:var(--gold); border-color:var(--gold); color:#000; font-weight:900; align-self: flex-end; padding: 10px 14px;">
+          🔍 Track
+        </button>
+      </div>
+
+      <!-- Security Hold Notice Box -->
+      <div id="custHoldNotice" style="display: none; background: rgba(255,179,0,0.12); border: 1px solid var(--gold); padding: 12px; border-radius: 6px; font-size: 12px; color: var(--gold); line-height: 1.45; margin-bottom: 12px;">
+        🔄 <strong>Verification in progress:</strong> Aapka request CC MOTOCRAFTS system mein receive ho gaya hai! Central Desk verification ke baad aapke Mobile, Email aur WhatsApp par dynamic return passcode send karega. Return password enter karke live video stream unlock karein.
+      </div>
+
+      <!-- Live Stream & Job Card Container -->
+      <div id="custLiveStreamContainer" style="display: none; margin-top: 16px;">
+        <div style="background: #000; border-radius: 8px; overflow: hidden; position: relative; height: 260px; margin-bottom: 14px; border: 1px solid rgba(0,229,255,0.4);">
+          <canvas id="custLiveCamCanvas" width="640" height="360" style="width: 100%; height: 100%; object-fit: cover; display: block;"></canvas>
+          <div style="position: absolute; top: 10px; left: 10px; background: rgba(0,0,0,0.75); border: 1px solid var(--danger); border-radius: 4px; padding: 2px 8px; font-size: 10px; font-family: var(--font-mono); color: #fff; display: flex; align-items: center; gap: 6px;">
+            <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background:var(--danger); animation: pulse 1s infinite;"></span>
+            LIVE BAY #02 • 60 FPS TELEMETRY
+          </div>
+          <div style="position: absolute; bottom: 8px; right: 10px; background: rgba(0,0,0,0.85); padding: 3px 8px; border-radius: 4px; font-size: 9.5px; font-weight: 900; color: #fff; border: 1px solid rgba(255,255,255,0.3);">
+            CC MOTOCRAFTS OFFICIAL
+          </div>
+        </div>
+
+        <!-- 4-Stage Progress -->
+        <h4 style="font-size: 13px; color: var(--theme-primary); margin-bottom: 8px;">DIGITAL JOB CARD PROGRESS</h4>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px; margin-bottom: 14px; font-size: 11px;">
+          <div class="stage-badge stage-done" style="text-align: center; justify-content: center;">1. Inspection & OBD ✅</div>
+          <div class="stage-badge stage-done" style="text-align: center; justify-content: center;">2. Teardown & Parts ✅</div>
+          <div class="stage-badge stage-active" style="text-align: center; justify-content: center;">3. Assembly (In Progress) ⏳</div>
+          <div class="stage-badge stage-pending" style="text-align: center; justify-content: center;">4. Road Test & Ready ⚪</div>
+        </div>
+
+        <div style="background: rgba(0,229,255,0.06); border: 1px solid var(--bg-card-border); padding: 12px; border-radius: 6px; font-size: 12px; margin-bottom: 14px;">
+          <strong style="color: #fff;">Customer Note Alert:</strong> "Check throttle delay at 4000 RPM & valve lash tuning."<br>
+          <span style="color: var(--text-muted); font-size: 11px;">Technician: Master Imran • Est Delivery: Today 5:30 PM</span>
+        </div>
+
+        <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+          <button class="btn-cyber" onclick="alert('Digital Job Card PDF downloaded with CC MOTOCRAFTS cryptographic watermark!')">
+            📄 Download Job Card PDF
+          </button>
+          <button class="btn-cyber" onclick="alert('Official GST Invoice downloaded!')">
+            🧾 Download GST Invoice
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Section 2: Instant Booking Form -->
+    <div class="card">
+      <h3 style="font-size: 17px; color: var(--theme-primary); margin-bottom: 4px;">⚡ 1-Click Digital Booking</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Direct booking confirmation to central dispatch and WhatsApp</p>
+
+      <form id="custBookingForm" onsubmit="handleCustBooking(event)">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Your Name:</label>
+            <input type="text" id="custName" class="form-input" placeholder="e.g. Rahul Sharma" required>
+          </div>
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Mobile Number:</label>
+            <input type="tel" id="custPhone" class="form-input" placeholder="e.g. 9849012345" required>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Vehicle Category:</label>
+            <select id="custCat" class="form-input">
+              <option value="2w">2-Wheeler (100cc - 2500cc)</option>
+              <option value="4w">4-Wheeler & Fleet (500cc - 15000cc)</option>
+            </select>
+          </div>
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Vehicle Model:</label>
+            <input type="text" id="custModel" class="form-input" placeholder="e.g. Royal Enfield 650 / Creta" required>
+          </div>
+        </div>
+
+        <div style="margin-bottom: 10px;">
+          <label style="font-size: 11px; color: var(--text-muted);">Service Needed / Problem Description:</label>
+          <input type="text" id="custProblem" class="form-input" placeholder="e.g. Engine noise, Brake pad replacement, General service" required>
+        </div>
+
+        <div style="margin-bottom: 14px; background: rgba(0,0,0,0.3); padding: 8px 12px; border-radius: 6px; display: flex; align-items: center; justify-content: space-between;">
+          <span style="font-size: 12px; color: #fff;">🚚 20 KM Free Pickup & Drop</span>
+          <input type="checkbox" id="custPickup" checked style="width: 18px; height: 18px; accent-color: var(--theme-primary);">
+        </div>
+
+        <button type="submit" class="btn-cyber-solid" style="width: 100%; padding: 11px; font-size: 13px; font-weight: 800; text-align: center; justify-content: center;">
+          ⚡ Confirm Booking & Open WhatsApp (+91 8333007351)
+        </button>
+      </form>
+    </div>
+
+    <!-- Section 3: 34 Photographic Portfolio Showcase -->
+    <div class="card">
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
+        <div>
+          <h3 style="font-size: 17px; color: #fff; margin: 0;">📸 Real Workshop Portfolio (34 Engineering Cards)</h3>
+          <small style="color: var(--text-muted); font-size: 11px;">Real garage photographs • Audio tool sound simulation • 1-Click WhatsApp booking</small>
+        </div>
+        <div style="display: flex; gap: 6px;">
+          <button class="btn-cyber" onclick="filterCustPortfolio('all')" style="padding: 4px 8px; font-size: 11px;">All</button>
+          <button class="btn-cyber" onclick="filterCustPortfolio('2w')" style="padding: 4px 8px; font-size: 11px;">2-Wheeler</button>
+          <button class="btn-cyber" onclick="filterCustPortfolio('4w')" style="padding: 4px 8px; font-size: 11px;">4-Wheeler</button>
+        </div>
+      </div>
+
+      <div id="custPortfolioGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 14px;">
+        <!-- Injected via JavaScript from data -->
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    const portfolioData = [{"id": "tw_01", "category": "2w", "title": "Superbike Computerized OBD/ECU Diagnostic", "workDescription": "Master technician handheld tablet scanner se superbike ki ECU mapping check karte huye. Sensor voltages, live AFR readings, aur throttle position sensor telemetry calibrate ki ja rahi hai.", "toolsUsed": "Handheld OBD2 Diagnostic Tablet, Multi-protocol CAN-Bus Cable, Digital Oscilloscope", "technicians": "Shahrukh Master Technician & Electronics Specialist", "vehicle": "Kawasaki Ninja ZX-10R / KTM Duke 390", "area": "Gachibowli Diagnostic Lab", "tag": "ECU & OBD DIAGNOSTICS", "audioEffect": "Digital CAN-Bus Telemetry Data Pulse", "realPhotoUrl": "https://images.unsplash.com/photo-1558981806-ec527fa84c39?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_02", "category": "2w", "title": "Engine Overhaul on Hydraulic Ramp", "workDescription": "Elevated bike lift par open engine, technician precision torque wrench se piston/head assemble karte huye. Cylinder bore honing aur fresh Viton stem seals fit kiye ja rahe hain.", "toolsUsed": "Pneumatic Bike Lift, Micrometer Torque Wrench, Piston Ring Compressor, Feeler Gauges", "technicians": "Shahrukh Master Technician & 2 Helpers", "vehicle": "Royal Enfield Continental GT 650", "area": "Bay 02 - Precision Overhaul Lab", "tag": "ENGINE OVERHAUL (1-YR WARRANTY)", "audioEffect": "Precision Torque Wrench Click (50 Nm)", "realPhotoUrl": "https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_03", "category": "2w", "title": "Gearless Scooter (Activa/Jupiter) Transmission Service", "workDescription": "Variator roller, clutch belt, aur pulley cleaning tools ke saath service bay mein. Judder-free take-off ke liye dry sliders aur kevlar drive belt calibrate ki ja rahi hai.", "toolsUsed": "Pneumatic Clutch Bell Holder, Acetone Degreasing Tank, Variator Spanner Lock", "technicians": "Harish Kumar (Lead CVT Specialist)", "vehicle": "Honda Activa 6G / TVS Jupiter 125", "area": "Bay 01 - Quick CVT Service Bay", "tag": "CVT & TRANSMISSION", "audioEffect": "High-Speed Variator Spin & Belt Whir", "realPhotoUrl": "https://images.unsplash.com/photo-1591768793355-74d04bb6608f?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_04", "category": "2w", "title": "Dyno Tuning & Performance Exhaust Check", "workDescription": "Superbike roller dyno testing bay mein, exhaust gas analyzer aur digital monitor screens ke saath. Peak BHP aur torque curves calibrate kiye ja rahe hain.", "toolsUsed": "Chassis Dynamometer, Wideband O2 Exhaust Sniffer, High-Velocity Cooling Blowers", "technicians": "Master ECU Tuner & Dyno Engineer", "vehicle": "BMW S1000RR / Yamaha R15 V4", "area": "Dyno Performance Bay", "tag": "PERFORMANCE TUNING", "audioEffect": "14,000 RPM Superbike Dyno Acceleration Roar", "realPhotoUrl": "https://images.unsplash.com/photo-1571127236794-81c0bbfe1ce3?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_05", "category": "2w", "title": "Carburetor & Fuel Injector Ultrasonic Cleaning", "workDescription": "Ultrasonic cleaning machine aur bench tester par injectors clean aur calibrate karte huye. Micron-level spray pattern aur fuel flow rate benchmark kiya ja raha hai.", "toolsUsed": "Heated Ultrasonic Tank, 4-Cylinder Injector Flow Bench, Digital Pressure Gauge", "technicians": "Fuel System Senior Technician", "vehicle": "KTM RC 390 / Bajaj Pulsar NS200", "area": "Clean Room Calibration Lab", "tag": "FUEL SYSTEM LAB", "audioEffect": "Ultrasonic 40 kHz Cavitation Buzz", "realPhotoUrl": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_06", "category": "2w", "title": "Front Fork & Rear Suspension Overhaul", "workDescription": "Hydraulic fork oil seal change aur monoshock calibration bench par technician kaam karte huye. Damping rebound rate aur nitrogen gas pressure recharge kiya ja raha hai.", "toolsUsed": "Inverted Fork Spring Compressor, Nitrogen Gas Charging Rig, Micrometer Height Gauge", "technicians": "Suspension & Chassis Specialist", "vehicle": "KTM 390 Adventure / RE Himalayan 450", "area": "Chassis & Geometry Bay", "tag": "SUSPENSION OVERHAUL", "audioEffect": "Pneumatic Nitrogen Recharging Hiss", "realPhotoUrl": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_07", "category": "2w", "title": "Brembo / ABS Disc Brake Bleeding & Service", "workDescription": "Hydraulic brake bleeder tool aur precision caliper service commuter aur superbikes ke liye. Sintered brake pads aur DOT 5.1 fluid air-bubble-free flush ho raha hai.", "toolsUsed": "Pneumatic Vacuum Brake Bleeder, Sintered Pad Gauge, Caliper Piston Press", "technicians": "Brake System Lead Technician", "vehicle": "Ducati Monster / Dominar 400", "area": "Braking & Safety Bay", "tag": "HYDRAULIC BRAKES", "audioEffect": "Pneumatic Fluid Evacuation Purge", "realPhotoUrl": "https://images.unsplash.com/photo-1600793575654-910699b5e4d4?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_08", "category": "2w", "title": "Electrical Wiring & Relay Harness Troubleshooting", "workDescription": "Digital multimeter, heat-shrink harness tools, aur computerized circuit testing. Short circuits, battery parasitic drain, aur CAN-Bus wiring faults trace kiye ja rahe hain.", "toolsUsed": "Fluke Automotive Multimeter, Thermal Imaging Camera, Automotive Pinout Test Kit", "technicians": "Auto-Electrical Master Technician", "vehicle": "Royal Enfield Classic 350 / Ather 450X", "area": "Electrical Diagnostics Bay", "tag": "ELECTRICAL HARNESS", "audioEffect": "Multimeter Continuity Beep (0.02 Ohms)", "realPhotoUrl": "https://images.unsplash.com/photo-1581092335397-9583fe92d232?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_09", "category": "2w", "title": "Chain Drive & Sprocket Replacement", "workDescription": "Heavy-duty chain breaker tool, alignment laser, aur professional lubricant spray station. X-Ring chain tension aur laser sprocket straightness adjust kiya ja raha hai.", "toolsUsed": "Laser Chain Alignment Tool, Chain Riveter/Breaker, Motul Chain Maintenance Station", "technicians": "Drivetrain Specialist & Helper", "vehicle": "Kawasaki Z900 / Suzuki Hayabusa", "area": "Drivetrain Bay", "tag": "CHAIN & SPROCKETS", "audioEffect": "Rivet Master Link Press Torque", "realPhotoUrl": "https://images.unsplash.com/photo-1597762470488-3877b1f538c6?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_10", "category": "2w", "title": "Wheel Trueing & Dynamic Tire Balancing", "workDescription": "Computerized motorcycle wheel balancing machine aur tire changer machine work bay. High-speed wobble khatam karne ke liye dial gauge se rim runout zero kiya ja raha hai.", "toolsUsed": "Digital Dynamic Wheel Balancer, Motorcycle Rim Trueing Stand, Dial Indicator", "technicians": "Wheel & Alignment Specialist", "vehicle": "Triumph Tiger 900 / Harley-Davidson Iron 883", "area": "Wheel & Tire Lab", "tag": "TIRE & BALANCING", "audioEffect": "Wheel Balancer High-RPM Calibration Spin", "realPhotoUrl": "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_11", "category": "2w", "title": "Valve Clearance & Shim Tappet Adjustment", "workDescription": "Feeler gauge aur micro-calipers se engine head valve timing set karte senior mechanic. Perfect cold clearance maintain karke peak compression lock kiya ja raha hai.", "toolsUsed": "Precision Feeler Gauge Set, Digital Vernier Caliper, Camshaft Timing Lock Pins", "technicians": "Shahrukh Master Engine Tuner", "vehicle": "Yamaha MT-15 / KTM Duke 250", "area": "Precision Valve Bay", "tag": "VALVE TIMING & SHIMS", "audioEffect": "Feeler Gauge 0.10mm Drag Snugness Check", "realPhotoUrl": "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_12", "category": "2w", "title": "Complete Foam Wash & Anti-Rust Detailing Bay", "workDescription": "Dedicated wash bay mein high-pressure washer, snow foam lance, aur air dryer station. Engine crevices se grease remove karke ceramic hydrophobic spray lagaya ja raha hai.", "toolsUsed": "180-Bar Pressure Washer, Italian Snow Foam Cannon, Warm Air Blow Dryer", "technicians": "Detailing Team & Washing Specialists", "vehicle": "All 2-Wheeler Fleet", "area": "Dedicated Hydro Detailing Bay", "tag": "DETAILING & FOAM WASH", "audioEffect": "High-Pressure 180 Bar Hydro Wash Blast", "realPhotoUrl": "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_13", "category": "2w", "title": "Pre-Delivery 30-Point Quality Inspection", "workDescription": "Senior technician digital checklist clipboard ke saath headlight, brakes aur engine scan karte huye. Quality pass hone ke baad road test certificate generate ho raha hai.", "toolsUsed": "Digital Quality Tablet, Battery Conductance Tester, Sound DB Meter", "technicians": "Quality Audit Head Inspector", "vehicle": "Superbikes & Commuters", "area": "Final Delivery Bay", "tag": "30-POINT INSPECTION", "audioEffect": "Quality Certification Approval Ding", "realPhotoUrl": "https://images.unsplash.com/photo-1617814076367-b759c7d7e738?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_14", "category": "2w", "title": "Doorstep Pickup & Breakdown Loading Van", "workDescription": "Hydraulic tail-lift wali branded CC Motocrafts pickup van mein bike secure load karte helpers. Hyderabad ke VIP areas se scratchless transport kiya ja raha hai.", "toolsUsed": "Hydraulic Van Tail-Lift, Soft-Tie Ratchet Straps, Wheel Chock Mounts", "technicians": "Doorstep Logistics Crew (Ramu & Team)", "vehicle": "Doorstep VIP Transit Service", "area": "Gachibowli 20km VIP Radius", "tag": "FREE DOORSTEP PICKUP", "audioEffect": "Hydraulic Tail-Lift Smooth Ascent", "realPhotoUrl": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_15", "category": "2w", "title": "Organized Special Tool Wall (Snap-on / Stanley Tools)", "workDescription": "Custom red/black shadow board jahan specialized bike diagnostic tools perfectly arranged hain. Har precision spanner aur puller ISO standard workshop specs par maintain hai.", "toolsUsed": "Calibrated Micrometers, Flywheel Pullers, Bearing Race Drivers, Clutch Holding Tools", "technicians": "Workshop Tool Control Officer", "vehicle": "CC Motocrafts Central Tool Wall", "area": "Central Workshop Facility", "tag": "SPECIALIZED TOOLING", "audioEffect": "Magnetic Tool Shadow Snap Return", "realPhotoUrl": "https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=800&q=80"}, {"id": "tw_16", "category": "2w", "title": "Lithium & Sealed Lead-Acid Battery Desulfation Lab", "workDescription": "Computerized battery condition analyzer par charging current aur cold cranking amps (CCA) test karte huye. Pulse desulfation se dead batteries revive ki ja rahi hain.", "toolsUsed": "High-Frequency Pulse Desulfator, Digital CCA Load Tester, Multi-Bank Smart Charger", "technicians": "Battery & Power Systems Specialist", "vehicle": "Yamaha Aerox 155 / Suzuki Hayabusa", "area": "Power & Battery Lab", "tag": "BATTERY DESULFATION", "audioEffect": "Digital Battery CCA Load Tester Hum", "realPhotoUrl": "https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_01", "category": "4w", "title": "Engine Hoist Crane Removal", "workDescription": "Luxury SUV ka bonnet open, hydraulic engine crane se engine block bahar nikaalte senior technician aur 2 helpers. Heavy-duty chassis cradle unbolted aur transmission uncoupled.", "toolsUsed": "3-Ton Hydraulic Engine Hoist, Heavy-Duty Engine Stand, Transmission Jack", "technicians": "Suresh Reddy & Heavy Engine Mechanics", "vehicle": "Toyota Fortuner / Mahindra Scorpio-N", "area": "Bay 04 - Heavy Commercial Lift Bay", "tag": "ENGINE OVERHAUL LAB", "audioEffect": "Hydraulic Ram Creak & Heavy Block Elevation", "realPhotoUrl": "https://images.unsplash.com/photo-1486006920555-c77dce18193b?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_02", "category": "4w", "title": "Dual-Post Hydraulic Car Ramp Service", "workDescription": "Lift par car elevated, neeche technician suspension, exhaust aur gearbox oil change karte huye. Under-chassis bushings aur ball joints play check kiye ja rahe hain.", "toolsUsed": "4-Ton Electro-Hydraulic 2-Post Lift, Pneumatic Oil Drainer, Under-Hoist Worklamp", "technicians": "Under-Chassis Service Crew", "vehicle": "Hyundai Creta / Kia Seltos", "area": "Bay 03 - Hydraulic Ramp Bay", "tag": "PERIODIC MAINTENANCE", "audioEffect": "Pneumatic Waste Oil Vacuum Suction", "realPhotoUrl": "https://images.unsplash.com/photo-1613214149922-f1809c99b414?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_03", "category": "4w", "title": "Computerized Engine Diagnostics (OBD2 Live Data)", "workDescription": "Car dashboard ke paas rolling diagnostic cart aur wireless tablet scan tool par fault codes clear karte huye. Fuel trim adaptations aur live ABS/SRS sensor graphs logged hain.", "toolsUsed": "Launch X431 Master Diagnostic Scanner, Rolling Tech Cart, Digital Multimeter", "technicians": "Shahrukh Master Diagnostic Specialist", "vehicle": "Skoda Octavia / BMW 3-Series", "area": "ECU Diagnostics Lab", "tag": "OBD-II LIVE TELEMETRY", "audioEffect": "CAN-Bus Flight Recorder ECU Sync Chime", "realPhotoUrl": "https://images.unsplash.com/photo-1580273916550-e323be2ae537?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_04", "category": "4w", "title": "Dust-Free Spray Paint Booth", "workDescription": "Full protective white suit aur mask mein technician HVLP spray gun se car body par mirror-finish paint karte huye. Positive air pressure filtration se 100% dust-free finish ensured.", "toolsUsed": "Down-Draft Paint Booth, Devilbiss HVLP Spray Gun, Clean Air Breathing Mask", "technicians": "Senior Automotive Painter", "vehicle": "Tata Safari / Volkswagen Virtus", "area": "Down-Draft Paint Booth", "tag": "DUST-FREE BOOTH", "audioEffect": "HVLP Atomized Spray Air Whoosh", "realPhotoUrl": "https://images.unsplash.com/photo-1625047509168-a7026f36de04?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_05", "category": "4w", "title": "Infrared Paint Curing Lamps", "workDescription": "Paint booth mein shortwave infrared heat lamps car panel paint bake aur dry karte huye. Hard clearcoat finish 30 minutes mein factory toughness achieve karti hai.", "toolsUsed": "3-Cassette Shortwave IR Heat Lamp, Digital Surface Laser Thermometer", "technicians": "Paint Finish Curing Specialist", "vehicle": "Audi A4 / MG Hector", "area": "Thermal Curing Bay", "tag": "INFRARED CURING", "audioEffect": "Thermal Element Hum & Cooling Fan", "realPhotoUrl": "https://images.unsplash.com/photo-1508974239320-0a029497e820?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_06", "category": "4w", "title": "Precision Dent Pulling (Stud Welder Station)", "workDescription": "Digital dent puller aur stud welder machine se car door panel ke dents bina cut kiye nikaalte huye. Original panel sheet metal shape restore ki ja rahi hai.", "toolsUsed": "Digital Spot Stud Welder, Slide Hammer, Lever Pulling Bar, Carbon Shrinking Tip", "technicians": "Master Bodywork Sheet Metal Craftsman", "vehicle": "Maruti Grand Vitara / Honda City", "area": "Tinkering & Bodywork Bay", "tag": "STUD DENT PULLING", "audioEffect": "Resistance Spot Weld Pulse & Hammer Pop", "realPhotoUrl": "https://images.unsplash.com/photo-1563720223185-11003d516935?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_07", "category": "4w", "title": "Automatic AC Gas Recovery & Refilling", "workDescription": "Fully automatic 3-in-1 AC machine se refrigerant vacuuming, leakage test aur gas charge karte huye. Compressor PAG oil refresh aur sub-zero cabin cooling guaranteed.", "toolsUsed": "Robinair Fully Automated R134a/R1234yf AC Station, Electronic Leak Detector", "technicians": "HVAC Auto Air-Conditioning Technician", "vehicle": "Hyundai Verna / Toyota Innova Crysta", "area": "Climate & AC Bay", "tag": "AUTOMATIC AC SERVICE", "audioEffect": "Deep AC Vacuum Pump Deep Purr", "realPhotoUrl": "https://images.unsplash.com/photo-1581092795360-fd1ca04f0952?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_08", "category": "4w", "title": "Disc Brake Lathe & Rotor Resurfacing", "workDescription": "On-car brake disc skimming machine se brake rotor surface smooth karte technician. High-speed brake judder aur uneven rotor wear micron accuracy se remove ho raha hai.", "toolsUsed": "On-Vehicle Brake Disc Lathe, Micrometer Thickness Gauge, Runout Dial Indicator", "technicians": "Precision Brake Lathe Machinist", "vehicle": "Ford Endeavour / Mahindra Thar", "area": "Machining & Lathe Bay", "tag": "ROTOR RESURFACING", "audioEffect": "Carbide Lathe Tip Shaving Steel Rotor Swarf", "realPhotoUrl": "https://images.unsplash.com/photo-1600793575654-910699b5e4d4?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_09", "category": "4w", "title": "3D Wheel Alignment & Camera Sensors", "workDescription": "High-tech 3D wheel alignment ramp par car ke charo wheels par reflector targets aur PC monitors. Camber, caster aur toe angle laser alignment se zero tire wear ensure hota hai.", "toolsUsed": "Corghi 3D Camera Wheel Alignment System, 4-Post Scissor Lift, Steering Lock Tool", "technicians": "Wheel Alignment & Geometry Engineer", "vehicle": "Mercedes-Benz C-Class / Tata Harrier", "area": "3D Laser Alignment Bay", "tag": "3D WHEEL ALIGNMENT", "audioEffect": "Laser Camera Optical Ping & Target Beep", "realPhotoUrl": "https://images.unsplash.com/photo-1578844251758-2f71da64c96f?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_10", "category": "4w", "title": "Automatic Transmission (AT/CVT) Fluid Flush", "workDescription": "Specialized machine se automatic gearbox oil complete drain aur fresh fluid flush karte huye. Torque converter aur valve body clutch sludge 100% evacuate ki ja rahi hai.", "toolsUsed": "Automatic Transmission Fluid (ATF) Exchange Machine, Optical Fluid Refractometer", "technicians": "Transmission Overhaul Specialist", "vehicle": "BMW X5 / Honda Civic CVT", "area": "Transmission Lab", "tag": "TRANSMISSION FLUSH", "audioEffect": "Synchronized Fluid Heat Exchanger Pump", "realPhotoUrl": "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_11", "category": "4w", "title": "Underbody Anti-Rust Rubberized Coating", "workDescription": "Car lift par elevated, pneumatic spray gun se black anti-corrosion coating lagate worker. Silencer zinc treatment aur running board stone-chip protection apply ho raha hai.", "toolsUsed": "Airless Underbody Spray Gun, 3M Rubberized Sealant Barrels, Exhaust Heat Spray", "technicians": "Underbody Protection Specialist", "vehicle": "Mahindra Scorpio-N / Maruti Brezza", "area": "Underbody Coating Bay", "tag": "ANTI-RUST COATING", "audioEffect": "High-Viscosity Rubberized Airless Jet", "realPhotoUrl": "https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_12", "category": "4w", "title": "Interior Deep Foam Cleaning & Ozone Sanitization", "workDescription": "Tornador foam gun aur ozone generator machine se car interior upholstery disinfect karte huye. AC vents, carpets aur leather seats se bacteria aur odors 100% eliminate hote hain.", "toolsUsed": "Tornador Pneumatic Cleaning Gun, Industrial Ozone Sterilizer Machine, Hot Water Extractor", "technicians": "Interior Detailing Craftsman", "vehicle": "All 4-Wheeler Passenger Cars", "area": "Interior Care Bay", "tag": "OZONE SANITIZATION", "audioEffect": "Vortex Pneumatic Tornador Whistle", "realPhotoUrl": "https://images.unsplash.com/photo-1520340356584-f9917d1eea6f?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_13", "category": "4w", "title": "Ceramic Coating & Dual-Action Buffing", "workDescription": "High-intensity inspection lights ke neeche rotary polisher se car paint par 9H ceramic coating apply karte huye. Swirl marks remove karke 3-year hydrophobic gloss lock ho rahi hai.", "toolsUsed": "Rupes Dual-Action Polisher, 9H Nano Ceramic Quartz Liquid, LED Paint Light Bar", "technicians": "Master Paint Detailer & Coating Specialist", "vehicle": "Volvo XC90 / Jeep Compass", "area": "Clean Detailing Studio", "tag": "CERAMIC 9H COATING", "audioEffect": "Dual-Action Random Orbital Polisher Drone", "realPhotoUrl": "https://images.unsplash.com/photo-1607860108855-64acf2078ed9?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_14", "category": "4w", "title": "Suspension Strut & Bushing Hydraulic Press", "workDescription": "20-ton hydraulic press machine par suspension arm bushings replace karte mechanics. Creaking noise khatam karke factory ride comfort restore kiya ja raha hai.", "toolsUsed": "20-Ton Heavy Hydraulic Shop Press, Multi-Size Bushing Drift Kit, Spring Clamps", "technicians": "Heavy Suspension Mechanic", "vehicle": "Renault Duster / Hyundai Creta", "area": "Press & Heavy Mechanical Bay", "tag": "HYDRAULIC PRESS LAB", "audioEffect": "20-Ton Hydraulic Ram Creak & Metal Seat Pop", "realPhotoUrl": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_15", "category": "4w", "title": "Master Tech Final Road-Test & Diagnostic Sign-Off", "workDescription": "Senior technician car ke andar OBD monitor connect karke final test drive checklist approve karte huye. High-speed braking, steering returnability aur emissions verified.", "toolsUsed": "Real-Time OBD Flight Recorder, Sound Level Analyzer, Digital Inspection Clipboard", "technicians": "Shahrukh Master Technician & Suresh Reddy", "vehicle": "Certified Cars & Fleets", "area": "Dynamic Road Test Circuit", "tag": "ROAD TEST CERTIFIED", "audioEffect": "Turbo Spool & ABS Modulation Pulse", "realPhotoUrl": "https://images.unsplash.com/photo-1449965408869-ebd079949988?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_16", "category": "4w", "title": "15,000cc Commercial Fleet Engine Head Re-facing", "workDescription": "Heavy commercial hauler 6-cylinder engine head re-faced on surface grinder machine. Copper injector washers aur multi-layer steel gasket torqued to 180 Nm + 90\u00b0.", "toolsUsed": "Industrial Head Surface Grinder, 1-Inch Drive Torque Wrench, Compression Rig", "technicians": "Suresh Reddy & Heavy Fleet Engineers", "vehicle": "Ashok Leyland Multi-Axle / BharatBenz Hauler", "area": "Heavy Commercial Engine Bay", "tag": "COMMERCIAL 15,000cc", "audioEffect": "Heavy Surface Grinder Diamond Pass", "realPhotoUrl": "https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_17", "category": "4w", "title": "Leaf Spring Re-Arching & Heavy Suspension Re-Bushing", "workDescription": "Commercial pickup aur SUV rear leaf spring pack disassembled, cold hydraulic re-arched, aur polyurethane bushings press kiye ja rahe hain for heavy payload stability.", "toolsUsed": "Hydraulic Spring Arching Table, Heavy C-Clamps, U-Bolt Torque Multiplier", "technicians": "Heavy Leaf Spring Craftsmen", "vehicle": "Mahindra Bolero Camper / Isuzu D-Max V-Cross", "area": "Heavy Drivetrain & Suspension Bay", "tag": "LEAF SPRING & BUSHING", "audioEffect": "Hydraulic Leaf Spring Tension Arch", "realPhotoUrl": "https://images.unsplash.com/photo-1517524008697-84bbe3c3fd98?auto=format&fit=crop&w=800&q=80"}, {"id": "fw_18", "category": "4w", "title": "Yellow Heavy Crane & Winch Hydraulic Overhaul", "workDescription": "Commercial recovery flatbed truck ka yellow hydraulic boom crane aur high-tonnage winch motor pressure seals replace aur load-tested to 5 tons.", "toolsUsed": "300-Bar Hydraulic Flow Bench, High-Pressure Seal Driver Kit, Dynamic Load Gauge", "technicians": "Hydraulic Machinery Master Specialist", "vehicle": "CC Motocrafts Flatbed Recovery Fleet", "area": "Heavy Crane & Recovery Bay", "tag": "HYDRAULIC CRANE & WINCH", "audioEffect": "300-Bar Hydraulic Pump Fluid Whine", "realPhotoUrl": "https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?auto=format&fit=crop&w=800&q=80"}];
+
+    function renderCustPortfolio(filter) {
+      const grid = document.getElementById('custPortfolioGrid');
+      grid.innerHTML = '';
+      const items = filter === 'all' ? portfolioData : portfolioData.filter(i => i.category === filter);
+
+      items.forEach((item, idx) => {
+        const is2w = item.category === '2w';
+        const accent = is2w ? '#00e5ff' : '#ff9100';
+        const card = document.createElement('div');
+        card.style = 'background: rgba(11,20,34,0.75); border: 1px solid var(--bg-card-border); border-radius: 8px; overflow: hidden; display: flex; flex-direction: column;';
+        card.innerHTML = `
+          <div style="position: relative; height: 160px; overflow: hidden;">
+            <img src="${item.realPhotoUrl}" alt="${item.title}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;">
+            <div style="position: absolute; inset: 0; background: linear-gradient(180deg, transparent 40%, rgba(6,11,19,0.9) 100%);"></div>
+            <div style="position: absolute; top: 8px; left: 8px; background: rgba(0,0,0,0.8); border: 1px solid ${accent}; border-radius: 4px; padding: 2px 6px; font-size: 9px; font-weight: 800; color: ${accent};">
+              #${String(idx+1).padStart(2,'0')} ${is2w ? '2-WHEELER' : '4-WHEELER'}
+            </div>
+            <div style="position: absolute; bottom: 6px; right: 8px; background: rgba(0,0,0,0.85); border: 1px solid rgba(255,255,255,0.4); border-radius: 3px; padding: 2px 6px; font-size: 8.5px; font-weight: 900; color: #fff;">
+              CC MOTOCRAFTS
+            </div>
+          </div>
+          <div style="padding: 12px; flex: 1; display: flex; flex-direction: column;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <span style="font-size: 10px; font-weight: 800; color: ${accent};">${item.vehicle}</span>
+              <button class="btn-cyber" style="padding: 2px 6px; font-size: 9.5px; color: var(--gold); border-color: var(--gold);" onclick="playWebAudioTool('${item.id}')">
+                🔊 Tool Audio
+              </button>
+            </div>
+            <h4 style="font-size: 13.5px; color: #fff; margin-bottom: 4px; line-height: 1.25;">${item.title}</h4>
+            <p style="font-size: 11.5px; color: var(--text-muted); line-height: 1.4; margin-bottom: 8px; flex: 1;">${item.workDescription}</p>
+            <div style="background: rgba(0,0,0,0.3); padding: 6px 8px; border-radius: 4px; font-size: 10.5px; margin-bottom: 10px;">
+              <div style="color: var(--text-muted);"><strong>Tools:</strong> ${item.toolsUsed}</div>
+            </div>
+            <a href="https://wa.me/918333007351?text=Hello%20CC%20Motocrafts%2C%20I%20want%20to%20book%20service%3A%20${encodeURIComponent(item.title)}%20for%20${encodeURIComponent(item.vehicle)}" target="_blank" class="btn-cyber-solid" style="padding: 8px; font-size: 11.5px; text-align: center; justify-content: center; text-decoration: none;">
+              ⚡ Book Service on WhatsApp
+            </a>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+    }
+
+    function filterCustPortfolio(type) {
+      renderCustPortfolio(type);
+    }
+
+    function trackCustomerGadi() {
+      const pass = document.getElementById('custPassInput').value.trim();
+      const holdBox = document.getElementById('custHoldNotice');
+      const liveBox = document.getElementById('custLiveStreamContainer');
+
+      if (pass === 'cc1005' || pass === '884102' || pass === '331209') {
+        holdBox.style.display = 'none';
+        liveBox.style.display = 'block';
+        startCustCam();
+      } else {
+        liveBox.style.display = 'none';
+        holdBox.style.display = 'block';
+      }
+    }
+
+    function startCustCam() {
+      const canvas = document.getElementById('custLiveCamCanvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      let angle = 0;
+      function render() {
+        ctx.fillStyle = '#050a12';
+        ctx.fillRect(0, 0, canvas.width, canvas.height);
+        ctx.strokeStyle = 'rgba(0, 229, 255, 0.2)';
+        ctx.lineWidth = 1;
+        for (let x = 0; x < canvas.width; x += 30) {
+          ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvas.height); ctx.stroke();
+        }
+        for (let y = 0; y < canvas.height; y += 30) {
+          ctx.beginPath(); ctx.moveTo(0, y); ctx.lineTo(canvas.width, y); ctx.stroke();
+        }
+        ctx.save();
+        ctx.translate(canvas.width / 2, canvas.height / 2);
+        ctx.rotate(angle);
+        ctx.fillStyle = '#00e5ff';
+        ctx.fillRect(-45, -45, 90, 90);
+        ctx.strokeStyle = '#fff';
+        ctx.strokeRect(-50, -50, 100, 100);
+        ctx.restore();
+        angle += 0.02;
+
+        ctx.fillStyle = '#00e5ff';
+        ctx.font = '11px monospace';
+        ctx.fillText(`CAM #02 • RPM: ${3200 + Math.floor(Math.sin(angle)*150)} • PSI: 14.8 • VOLT: 13.9V`, 14, canvas.height - 14);
+        requestAnimationFrame(render);
+      }
+      render();
+    }
+
+    function handleCustBooking(e) {
+      e.preventDefault();
+      const name = document.getElementById('custName').value;
+      const phone = document.getElementById('custPhone').value;
+      const cat = document.getElementById('custCat').value.toUpperCase();
+      const model = document.getElementById('custModel').value;
+      const prob = document.getElementById('custProblem').value;
+      const pickup = document.getElementById('custPickup').checked ? 'Yes (20 KM Free)' : 'No';
+
+      const msg = `*NEW BOOKING - CC MOTOCRAFTS*%0A*Customer:* ${name}%0A*Phone:* ${phone}%0A*Category:* ${cat}%0A*Model:* ${model}%0A*Service:* ${prob}%0A*Pickup Required:* ${pickup}`;
+      window.open(`https://wa.me/918333007351?text=${msg}`, '_blank');
+      alert('Booking initiated! Opening WhatsApp for instant technician confirmation.');
+    }
+
+    function playWebAudioTool(id) {
+      try {
+        const ctx = new (window.AudioContext || window.webkitAudioContext)();
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.type = 'sawtooth';
+        osc.frequency.setValueAtTime(140, ctx.currentTime);
+        osc.frequency.exponentialRampToValueAtTime(40, ctx.currentTime + 0.35);
+        gain.gain.setValueAtTime(0.3, ctx.currentTime);
+        gain.gain.linearRampToValueAtTime(0.01, ctx.currentTime + 0.35);
+        osc.start(); osc.stop(ctx.currentTime + 0.35);
+      } catch(e) {}
+    }
+
+    let deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+    function triggerPwaInstall() {
+      if (deferredPrompt) {
+        deferredPrompt.prompt();
+      } else {
+        alert('To install Customer App on your phone:\n\n• Android (Chrome): Tap top-right 3 dots -> "Install App" or "Add to Home screen".\n• iPhone (Safari): Tap Share icon -> "Add to Home Screen".\n\n⚡ 0-second quick launch & works offline!');
+      }
+    }
+
+    renderCustPortfolio('all');
+  </script>
+</body>
+</html>

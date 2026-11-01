@@ -1,0 +1,61 @@
+[
+  {
+    "invoiceNo": "CCM-INV-2024-1049",
+    "partnerId": "partner_001",
+    "partnerName": "Harish CC Motocrafts Hub",
+    "date": "2024-10-30",
+    "customer": {
+      "name": "Syed Farhan",
+      "mobile": "+91 9849112233",
+      "email": "farhan.syed@gmail.com",
+      "vehicleModel": "KTM Duke 390",
+      "regNumber": "TS 09 EA 1234"
+    },
+    "isGst": true,
+    "gstNumber": "36AABCC1234F1Z5",
+    "tradeLicense": "GHMC/TL/2024/98712",
+    "items": [
+      {
+        "description": "Precision OBD-II ECU Scan & Telemetry Reset",
+        "hsn": "9987",
+        "qty": 1,
+        "rate": 650,
+        "amount": 650
+      },
+      {
+        "description": "Motul 300V 15W50 Synthetic Engine Oil (1.7L)",
+        "hsn": "2710",
+        "qty": 1,
+        "rate": 1850,
+        "amount": 1850
+      },
+      {
+        "description": "OEM KTM Oil Filter & Viton O-Ring Kit",
+        "hsn": "8421",
+        "qty": 1,
+        "rate": 280,
+        "amount": 280
+      },
+      {
+        "description": "Front Brembo Sintered Brake Pads",
+        "hsn": "8714",
+        "qty": 1,
+        "rate": 1450,
+        "amount": 1450
+      },
+      {
+        "description": "Master Labor: Valve Tappet Calibration & Coolant Flush",
+        "hsn": "9987",
+        "qty": 1,
+        "rate": 1200,
+        "amount": 1200
+      }
+    ],
+    "subTotal": 5430,
+    "cgst": 488.7,
+    "sgst": 488.7,
+    "grandTotal": 6407.4,
+    "watermark": "CC MOTOCRAFTS OFFICIAL NETWORK AUTHENTICATED",
+    "warrantyTerms": "General Service 30 Days Working Guarantee. Wear & tear components (brake pads, filters) excluded."
+  }
+]

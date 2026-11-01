@@ -1,0 +1,147 @@
+[
+  {
+    "bookingId": "BK-2024-901",
+    "createdAt": "2024-10-31 09:30 AM",
+    "customer": {
+      "name": "Syed Farhan",
+      "mobile": "9849112233",
+      "email": "farhan.syed@gmail.com",
+      "vehicleType": "2w",
+      "vehicleModel": "KTM Duke 390",
+      "regNumber": "TS 09 EA 1234"
+    },
+    "servicePackage": "Stage-3 Precision Engine Rebuild & Valve Lapping",
+    "serviceType": "engine_rebuild",
+    "partnerId": "partner_001",
+    "partnerName": "Harish CC Motocrafts Hub (Gachibowli)",
+    "assignedBay": "Bay 02 - Precision Engine Overhaul Bay",
+    "assignedTechnician": "Shahrukh Master Technician",
+    "currentStage": "Step 2: Engine Disassembly in Progress",
+    "stageIndex": 2,
+    "progressPercent": 65,
+    "currentKm": 20400,
+    "lastServiceKm": 18500,
+    "estimatedDelivery": "Today, 05:30 PM",
+    "paymentStatus": "Paid Advance (₹5,000)",
+    "totalEstimate": 8500,
+    "doorstepPickup": {
+      "isVipFree": true,
+      "address": "Telecom Nagar, Gachibowli, Hyderabad - 500032",
+      "driverAssigned": "Ramu (Flatbed Transporter #04)"
+    },
+    "warrantyStatus": {
+      "type": "1-Year Engine Rebuild Overhaul Warranty",
+      "active": true,
+      "breakInDueKm": 21150,
+      "rules": "Mandatory first service at 500-750 KM (15-30 days)"
+    }
+  },
+  {
+    "bookingId": "BK-2024-902",
+    "createdAt": "2024-10-31 10:15 AM",
+    "customer": {
+      "name": "Dr. Ananya Rao",
+      "mobile": "9123445566",
+      "email": "ananya.rao@apollo.org",
+      "vehicleType": "4w",
+      "vehicleModel": "Hyundai Creta 1.5 SX(O)",
+      "regNumber": "TS 08 FG 5541"
+    },
+    "servicePackage": "Mandatory First 700 KM Overhaul Checkup & Oil Flush",
+    "serviceType": "engine_rebuild",
+    "partnerId": "partner_003",
+    "partnerName": "Banjara CarS CareS Fleet & Overhaul Hub",
+    "assignedBay": "Bay 04 - Heavy Commercial & Car Lift Bay",
+    "assignedTechnician": "Suresh Senior Overhaul Specialist",
+    "currentStage": "Step 3: Fresh Synthetic Oil Refill & Torque Verification",
+    "stageIndex": 3,
+    "progressPercent": 80,
+    "currentKm": 34200,
+    "lastServiceKm": 33500,
+    "estimatedDelivery": "Today, 02:00 PM",
+    "paymentStatus": "Pending (Post Delivery)",
+    "totalEstimate": 3800,
+    "doorstepPickup": {
+      "isVipFree": true,
+      "address": "Road No. 12, Banjara Hills, Hyderabad - 500034",
+      "driverAssigned": "Dedicated Driver (Kiran)"
+    },
+    "warrantyStatus": {
+      "type": "1-Year Engine Overhaul Warranty",
+      "active": true,
+      "notes": "Break-in service underway to lock in 1-Year Crank & Cylinder Bore warranty"
+    }
+  },
+  {
+    "bookingId": "BK-2024-903",
+    "createdAt": "2024-10-31 11:00 AM",
+    "customer": {
+      "name": "Karthik Varma",
+      "mobile": "9700123456",
+      "email": "karthik.varma@techmahindra.com",
+      "vehicleType": "2w",
+      "vehicleModel": "Honda Activa 6G H-Smart",
+      "regNumber": "TS 07 HK 9088"
+    },
+    "servicePackage": "CVT Variator Overhaul & Periodic Transmission Tune",
+    "serviceType": "general_service",
+    "partnerId": "partner_001",
+    "partnerName": "Harish CC Motocrafts Hub (Gachibowli)",
+    "assignedBay": "Bay 01 - Quick CVT & Periodic Bay",
+    "assignedTechnician": "Harish Kumar",
+    "currentStage": "Step 1: Vehicle Inspection & CVT Teardown",
+    "stageIndex": 1,
+    "progressPercent": 30,
+    "currentKm": 12100,
+    "lastServiceKm": 11800,
+    "estimatedDelivery": "Today, 03:30 PM",
+    "paymentStatus": "Paid Online (₹2,450)",
+    "totalEstimate": 2450,
+    "doorstepPickup": {
+      "isVipFree": true,
+      "address": "Hi-Tech City, Madhapur, Hyderabad - 500081",
+      "driverAssigned": "Doorstep Pickup Completed"
+    },
+    "warrantyStatus": {
+      "type": "30-Day General Service Guarantee",
+      "active": true,
+      "notes": "Covers variator roller tuning & drive belt assembly"
+    }
+  },
+  {
+    "bookingId": "BK-2024-904",
+    "createdAt": "2024-10-31 11:45 AM",
+    "customer": {
+      "name": "Vikram Singh",
+      "mobile": "9988776655",
+      "email": "vikram.ccmoto@gmail.com",
+      "vehicleType": "4w",
+      "vehicleModel": "Mahindra Thar 2.2 CRDe 4x4",
+      "regNumber": "TS 09 EU 8812"
+    },
+    "servicePackage": "ECU Diagnostics, CAN-Bus Ripple Test & Turbo Overhaul",
+    "serviceType": "engine_rebuild",
+    "partnerId": "partner_004",
+    "partnerName": "Secunderabad Classic & Commercial Workshop",
+    "assignedBay": "Bay 03 - 4x4 Dyno & Diagnostics Bay",
+    "assignedTechnician": "Suresh Senior Overhaul Specialist",
+    "currentStage": "Step 1: Vehicle Inspection & OBD Scan Completed",
+    "stageIndex": 1,
+    "progressPercent": 25,
+    "currentKm": 45800,
+    "lastServiceKm": 43200,
+    "estimatedDelivery": "Tomorrow, 12:00 PM",
+    "paymentStatus": "Advance Paid (₹10,000)",
+    "totalEstimate": 18500,
+    "doorstepPickup": {
+      "isVipFree": true,
+      "address": "Sindhi Colony, Secunderabad - 500003",
+      "driverAssigned": "Flatbed Hauler #02"
+    },
+    "warrantyStatus": {
+      "type": "1-Year Engine Rebuild Warranty",
+      "active": true,
+      "notes": "Turbocharger boost pressure & intercooler circuit covered"
+    }
+  }
+]

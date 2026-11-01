@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>CC MOTOCRAFTS | Partner Garage Portal (App 2)</title>
+  <meta name="description" content="Garage Partner Portal for job cards, stage progress, OBD diagnostics, and GST invoicing.">
+  <meta name="theme-color" content="#ff9100">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="manifest" href="manifest.json">
+  <style>
+    :root {
+      --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
+      --font-mono: 'SF Mono', Consolas, 'Courier New', monospace;
+      --theme-primary: #ff9100;
+      --bg-dark-base: #0c0804;
+      --bg-card: rgba(26, 17, 8, 0.85);
+      --bg-card-border: rgba(255, 145, 0, 0.3);
+      --text-main: #f0f6fc;
+      --text-muted: #9e8d7f;
+      --gold: #ffb300;
+      --danger: #ff3366;
+      --success: #00e676;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: var(--font-main);
+      background-color: var(--bg-dark-base);
+      color: var(--text-main);
+      line-height: 1.5;
+      padding-bottom: 70px;
+    }
+    .header {
+      display: flex; justify-content: space-between; align-items: center; padding: 12px 18px;
+      background: rgba(12, 8, 4, 0.95); border-bottom: 1px solid var(--bg-card-border);
+      position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
+    }
+    .logo { font-size: 15px; font-weight: 900; letter-spacing: 1px; color: #fff; text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .btn-cyber {
+      background: rgba(255, 145, 0, 0.08); border: 1px solid var(--theme-primary); color: var(--theme-primary);
+      padding: 7px 12px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .btn-cyber-solid {
+      background: var(--theme-primary); border: 1px solid var(--theme-primary); color: #000;
+      padding: 7px 12px; border-radius: 6px; font-size: 11.5px; font-weight: 800; cursor: pointer; text-decoration: none;
+      display: inline-flex; align-items: center; gap: 6px;
+    }
+    .container { max-width: 1000px; margin: 0 auto; padding: 16px; }
+    .card {
+      background: var(--bg-card); border: 1px solid var(--bg-card-border); border-radius: 10px;
+      padding: 18px; margin-bottom: 18px;
+    }
+    .form-input {
+      width: 100%; background: rgba(3, 7, 13, 0.85); border: 1px solid var(--bg-card-border);
+      color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 13px; margin-top: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header class="header">
+    <a href="index.html" class="logo">
+      <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--theme-primary);"></span>
+      CC MOTOCRAFTS <span style="font-size:10px; background:rgba(255,145,0,0.2); border:1px solid var(--theme-primary); padding:2px 6px; border-radius:3px; color:var(--theme-primary);">APP 2: PARTNER GARAGE</span>
+    </a>
+    <div style="display: flex; gap: 8px;">
+      <button class="btn-cyber" onclick="triggerPwaInstall()">📲 Install App</button>
+      <a href="https://wa.me/918333007351" target="_blank" class="btn-cyber-solid">Support Desk</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <!-- Auth Gate Modal / Screen -->
+    <div id="partnerAuthGate" class="card" style="max-width: 480px; margin: 40px auto; border: 2px solid var(--theme-primary); text-align: center;">
+      <span style="font-size: 32px; display: block; margin-bottom: 8px;">🔐</span>
+      <h3 style="font-size: 18px; color: #fff; margin-bottom: 4px;">Partner Garage Authentication</h3>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Enter your assigned Garage Partner Passcode to access your isolated workshop dashboard.</p>
+
+      <div style="margin-bottom: 14px;">
+        <input type="password" id="partnerPassInput" class="form-input" placeholder="Enter Garage Passcode" style="text-align: center; font-size: 16px; letter-spacing: 2px;">
+      </div>
+
+      <button class="btn-cyber-solid" onclick="verifyPartnerLogin()" style="width: 100%; padding: 11px; font-size: 13px; font-weight: 800; justify-content: center;">
+        Unlock Garage Dashboard
+      </button>
+
+      <!-- Hold Notice -->
+      <div id="partnerHoldNotice" style="display: none; margin-top: 14px; background: rgba(255,51,102,0.12); border: 1px solid var(--danger); padding: 12px; border-radius: 6px; font-size: 12px; color: var(--danger); line-height: 1.45; text-align: left;">
+        ⛔ <strong>DEVICE HOLD SCREEN:</strong> Passcode verify nahi hua. Security hold trigger ho gaya hai aur central alert desk (<code style="color:#fff;">aisupport.on@gmail.com</code>) ko report send ho gayi hai. Passcode praapt karne ke liye company desk se sampark karein.
+      </div>
+    </div>
+
+    <!-- Authenticated Dashboard -->
+    <div id="partnerDashboardContent" style="display: none;">
+
+      <!-- Garage Profile Card -->
+      <div class="card" style="border-left: 4px solid var(--theme-primary);">
+        <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
+          <div>
+            <span style="font-size: 10px; font-weight: 800; color: var(--theme-primary); font-family: var(--font-mono);">ACTIVE PARTNER WORKSHOP</span>
+            <h3 style="font-size: 19px; color: #fff; margin: 2px 0;">SpeedTech Precision Moto Lab (Madhapur Hub)</h3>
+            <p style="font-size: 12px; color: var(--text-muted);">Plot 18, Near Durgam Cheruvu Metro • Contact: +91 9876543210 • GSTIN: 36XYZPK9876L2D9</p>
+          </div>
+          <span style="background: rgba(0,230,118,0.15); border: 1px solid var(--success); color: var(--success); padding: 4px 10px; border-radius: 4px; font-size: 11px; font-weight: 800;">
+            ● WORKSHOP LIVE (2W EXPERT)
+          </span>
+        </div>
+      </div>
+
+      <!-- Workshop Ramps & 4-Stage Advance -->
+      <div class="card">
+        <h3 style="font-size: 16px; color: var(--theme-primary); margin-bottom: 12px;">🔧 Active Workshop Bay Ramps (Advance Stages)</h3>
+
+        <div style="display: grid; gap: 12px;">
+          <!-- Job 1 -->
+          <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--bg-card-border); border-radius: 8px; padding: 14px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+              <div>
+                <strong style="color: #fff; font-size: 14px;">TS 09 EA 1234 • Royal Enfield Continental GT 650</strong>
+                <div style="font-size: 11.5px; color: var(--text-muted);">Customer: Syed Farhan • Problem: Valve Lapping & CVT Telemetry Tuning</div>
+              </div>
+              <span id="jobStageBadge1" style="background: rgba(0,229,255,0.15); border: 1px solid #00e5ff; color: #00e5ff; padding: 3px 8px; border-radius: 4px; font-size: 11px; font-weight: 700;">
+                Stage 3: Assembly
+              </span>
+            </div>
+            <div style="display: flex; gap: 8px; flex-wrap: wrap; margin-top: 10px;">
+              <button class="btn-cyber" onclick="advanceStage(1, 1)">1. Inspection</button>
+              <button class="btn-cyber" onclick="advanceStage(1, 2)">2. Teardown</button>
+              <button class="btn-cyber" onclick="advanceStage(1, 3)">3. Assembly</button>
+              <button class="btn-cyber-solid" onclick="advanceStage(1, 4)">4. Ready for Delivery ✅</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- GST Invoicing with Toggle -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+          <h3 style="font-size: 16px; color: var(--theme-primary); margin: 0;">🧾 Watermarked Digital Invoice Generator</h3>
+          <div style="display: flex; align-items: center; gap: 8px; background: rgba(0,0,0,0.4); padding: 4px 10px; border-radius: 6px;">
+            <span style="font-size: 12px; color: #fff;">GST (18%):</span>
+            <input type="checkbox" id="gstToggle" checked onchange="recalcInvoice()" style="width: 16px; height: 16px; accent-color: var(--theme-primary);">
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px;">
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Labour Charges (₹):</label>
+            <input type="number" id="invLabour" class="form-input" value="1200" oninput="recalcInvoice()">
+          </div>
+          <div>
+            <label style="font-size: 11px; color: var(--text-muted);">Spare Parts Cost (₹):</label>
+            <input type="number" id="invSpares" class="form-input" value="2850" oninput="recalcInvoice()">
+          </div>
+        </div>
+
+        <div style="background: rgba(0,0,0,0.5); padding: 12px; border-radius: 6px; margin-bottom: 14px; font-size: 12.5px;">
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <span>Subtotal:</span>
+            <span id="invSubtotal">₹4,050.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; margin-bottom: 4px;">
+            <span>GST (18%):</span>
+            <span id="invGst">₹729.00</span>
+          </div>
+          <div style="display: flex; justify-content: space-between; font-weight: 800; font-size: 14px; color: var(--theme-primary); border-top: 1px solid rgba(255,255,255,0.1); padding-top: 4px;">
+            <span>Total Bill Payable:</span>
+            <span id="invTotal">₹4,779.00</span>
+          </div>
+        </div>
+
+        <button class="btn-cyber-solid" onclick="alert('Official CC MOTOCRAFTS Tax Invoice Generated with Watermark & QR Code!')" style="width: 100%; padding: 10px; justify-content: center;">
+          🖨️ Print / Download Official Watermarked Invoice
+        </button>
+      </div>
+
+      <!-- OBD-II Fault Solver -->
+      <div class="card">
+        <h3 style="font-size: 16px; color: var(--theme-primary); margin-bottom: 8px;">🔍 HTS Engine 1: Master OBD-II Fault Solver</h3>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Enter OBD code for live sensor telemetry and precision mechanical fix advice:</p>
+        <div style="display: flex; gap: 8px; margin-bottom: 10px;">
+          <input type="text" id="obdSearchInput" class="form-input" placeholder="e.g. P0300, P0171, P0420" value="P0300">
+          <button class="btn-cyber-solid" onclick="searchObdCode()" style="white-space: nowrap;">Solve Fault</button>
+        </div>
+        <div id="obdResultBox" style="background: rgba(0,0,0,0.4); padding: 12px; border-radius: 6px; font-size: 12px; line-height: 1.45; border: 1px solid var(--bg-card-border);">
+          <strong style="color: var(--danger);">P0300 - Random/Multiple Cylinder Misfire Detected</strong><br>
+          <span style="color: var(--text-muted);">Root Cause: Ignition coil primary circuit breakdown or spark plug gap erosion.</span><br>
+          <strong style="color: #fff;">Telemetry:</strong> Cyl 1 Misfires: 42/min • Cyl 2 Misfires: 38/min • Fuel Trim: +14.2%<br>
+          <strong style="color: var(--success);">Mechanical Action:</strong> Measure spark plug electrode gap (0.8mm spec) and test coil pack resistance at 8.2 kΩ.
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <script>
+    function verifyPartnerLogin() {
+      const code = document.getElementById('partnerPassInput').value.trim();
+      const holdNotice = document.getElementById('partnerHoldNotice');
+      const gate = document.getElementById('partnerAuthGate');
+      const content = document.getElementById('partnerDashboardContent');
+
+      if (code === 'cc105') {
+        gate.style.display = 'none';
+        content.style.display = 'block';
+      } else {
+        holdNotice.style.display = 'block';
+      }
+    }
+
+    function advanceStage(jobId, stageNum) {
+      const stages = ['Stage 1: Inspection', 'Stage 2: Teardown', 'Stage 3: Assembly', 'Stage 4: Ready for Delivery'];
+      const badge = document.getElementById('jobStageBadge1');
+      if (badge) {
+        badge.textContent = stages[stageNum - 1];
+        if (stageNum === 4) {
+          badge.style.color = '#00e676';
+          badge.style.borderColor = '#00e676';
+          alert('Stage updated to READY FOR DELIVERY! Instant WhatsApp alert triggered to customer.');
+        } else {
+          badge.style.color = '#00e5ff';
+          badge.style.borderColor = '#00e5ff';
+          alert('Stage updated to ' + stages[stageNum - 1] + '! Synced with Customer Live Bay.');
+        }
+      }
+    }
+
+    function recalcInvoice() {
+      const labour = parseFloat(document.getElementById('invLabour').value) || 0;
+      const spares = parseFloat(document.getElementById('invSpares').value) || 0;
+      const isGst = document.getElementById('gstToggle').checked;
+
+      const subtotal = labour + spares;
+      const gst = isGst ? subtotal * 0.18 : 0;
+      const total = subtotal + gst;
+
+      document.getElementById('invSubtotal').textContent = '₹' + subtotal.toFixed(2);
+      document.getElementById('invGst').textContent = '₹' + gst.toFixed(2);
+      document.getElementById('invTotal').textContent = '₹' + total.toFixed(2);
+    }
+
+    function searchObdCode() {
+      const code = document.getElementById('obdSearchInput').value.trim().toUpperCase();
+      const box = document.getElementById('obdResultBox');
+      if (code === 'P0171') {
+        box.innerHTML = `<strong style="color:var(--danger)">P0171 - System Too Lean (Bank 1)</strong><br><span style="color:var(--text-muted)">Root Cause: Vacuum leak at intake manifold gasket or clogged fuel injector.</span><br><strong style="color:#fff">Action:</strong> Smoke test intake plenum and check fuel rail pressure (target 43.5 PSI).`;
+      } else if (code === 'P0420') {
+        box.innerHTML = `<strong style="color:var(--danger)">P0420 - Catalyst System Efficiency Below Threshold</strong><br><span style="color:var(--text-muted)">Root Cause: Catalytic converter substrate fouling or downstream O2 sensor drift.</span><br><strong style="color:#fff">Action:</strong> Compare upstream vs downstream O2 sensor voltage wave forms (0.1V - 0.9V switching).`;
+      } else {
+        box.innerHTML = `<strong style="color:var(--danger)">P0300 - Random Cylinder Misfire</strong><br><span style="color:var(--text-muted)">Root Cause: Ignition coil failure or fuel delivery delay.</span><br><strong style="color:#fff">Action:</strong> Check spark plug gap (0.8mm spec) and coil pack resistance.`;
+      }
+    }
+
+    let deferredPrompt = null;
+    window.addEventListener('beforeinstallprompt', (e) => {
+      e.preventDefault();
+      deferredPrompt = e;
+    });
+    function triggerPwaInstall() {
+      if (deferredPrompt) deferredPrompt.prompt();
+      else alert('To install Partner App on phone:\n\n• Tap browser menu (3 dots) -> "Install App" or "Add to Home screen".');
+    }
+  </script>
+</body>
+</html>

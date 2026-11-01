@@ -1,0 +1,37 @@
+/* Official Watermark & Invoice Styles */
+.invoice-sheet-container {
+  background: #ffffff; color: #1a1a1a; border-radius: 8px; padding: 36px 42px; position: relative;
+  overflow: hidden; box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4); font-family: 'Segoe UI', Arial, sans-serif; margin-top: 20px;
+}
+.invoice-sheet-container::before {
+  content: "CC MOTOCRAFTS AUTHENTICATED PARTNER NETWORK"; position: absolute; top: 45%; left: 50%;
+  transform: translate(-50%, -50%) rotate(-30deg); font-size: 36px; font-weight: 900; color: rgba(0, 0, 0, 0.045);
+  white-space: nowrap; pointer-events: none; z-index: 1; letter-spacing: 4px; border: 4px dashed rgba(0, 0, 0, 0.04);
+  padding: 18px 40px; border-radius: 12px;
+}
+.invoice-watermark-seal {
+  position: absolute; bottom: 24px; right: 28px; width: 140px; height: 140px; border: 3px double #0d47a1;
+  border-radius: 50%; display: flex; flex-direction: column; align-items: center; justify-content: center;
+  text-align: center; background: radial-gradient(circle, rgba(13, 71, 161, 0.05) 0%, rgba(255, 255, 255, 0) 70%);
+  transform: rotate(-10deg); pointer-events: none; z-index: 2;
+}
+.seal-circle-text { font-size: 8px; font-weight: 800; text-transform: uppercase; color: #0d47a1; letter-spacing: 1px; }
+.seal-center-badge { font-size: 13px; font-weight: 900; color: #b71c1c; margin: 3px 0; border-top: 1px solid #0d47a1; border-bottom: 1px solid #0d47a1; padding: 2px 6px; }
+.seal-subtext { font-size: 7.5px; font-weight: 700; color: #0d47a1; }
+.inv-header { display: flex; justify-content: space-between; border-bottom: 2px solid #0d47a1; padding-bottom: 18px; margin-bottom: 20px; position: relative; z-index: 2; }
+.inv-brand h2 { font-size: 24px; font-weight: 900; color: #0d47a1; }
+.inv-details-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 24px; position: relative; z-index: 2; }
+.inv-details-box { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 6px; padding: 14px; font-size: 12.5px; }
+.inv-table { width: 100%; border-collapse: collapse; margin-bottom: 20px; font-size: 12.5px; position: relative; z-index: 2; }
+.inv-table th { background: #0d47a1; color: #ffffff; padding: 8px 10px; text-align: left; }
+.inv-table td { padding: 8px 10px; border-bottom: 1px solid #e2e8f0; }
+.inv-summary-box { display: flex; justify-content: flex-end; position: relative; z-index: 2; margin-bottom: 24px; }
+.inv-summary-table { width: 280px; font-size: 13px; }
+.inv-summary-table tr.total-row td { font-weight: 800; font-size: 15px; color: #0d47a1; border-top: 2px solid #0d47a1; border-bottom: 2px solid #0d47a1; }
+.inv-warranty-terms { border-top: 1px dashed #94a3b8; padding-top: 12px; font-size: 10.5px; color: #475569; position: relative; z-index: 2; max-width: 60%; }
+@media print {
+  body * { visibility: hidden; }
+  .invoice-sheet-container, .invoice-sheet-container * { visibility: visible; }
+  .invoice-sheet-container { position: absolute; left: 0; top: 0; width: 100%; box-shadow: none; padding: 20px; }
+  .btn-print-action, header, footer, .modal-overlay { display: none !important; }
+}

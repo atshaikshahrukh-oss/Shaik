@@ -1,0 +1,24 @@
+{
+  "name": "ccmotocrafts-enterprise-dual-ai-platform",
+  "version": "2.5.0",
+  "description": "CC MOTOCRAFTS All-in-One Dual-AI Platform for Multi-Tenant Partner Garages, OBD Diagnostics, and Live Customer Video Bay Tracking",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "node scripts/test_endpoints.js"
+  },
+  "keywords": [
+    "ccmotocrafts",
+    "mechanic-ai",
+    "obd-diagnostics",
+    "live-garage-camera",
+    "digital-job-card",
+    "hyderabad-automotive"
+  ],
+  "author": "CC MOTOCRAFTS Engineering & Shahrukh Master Diagnostics",
+  "license": "Proprietary",
+  "engines": {
+    "node": ">=16.0.0"
+  }
+}

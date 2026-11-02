@@ -1,44 +1,22 @@
 {
-  "name": "CC MOTOCRAFTS - Dual-AI Automotive & Workshop Platform",
-  "short_name": "CC Motocrafts",
-  "start_url": "/index.html",
+  "name": "CC MOTOCRAFTS | Customer App",
+  "short_name": "CC Customer",
+  "description": "Book 2W & 4W service, track vehicle in real-time, 60 FPS live bay camera, and warranty records.",
+  "start_url": "index.html",
   "display": "standalone",
   "background_color": "#060b13",
   "theme_color": "#00e5ff",
-  "orientation": "any",
-  "description": "CC Motocrafts Workshop Management, 25-Yr OBD Diagnostic AI & Live Customer Work Bay Video Streaming",
+  "orientation": "portrait",
   "icons": [
     {
-      "src": "/assets/icon-192.png",
+      "src": "assets/icon-192.png",
       "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+      "type": "image/png"
     },
     {
-      "src": "/assets/icon-512.png",
+      "src": "assets/icon-512.png",
       "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ],
-  "shortcuts": [
-    {
-      "name": "Bookings & Records App",
-      "short_name": "Bookings",
-      "url": "/index.html#bookingAppSection",
-      "description": "Manage workshop bookings & customer warranty timelines"
-    },
-    {
-      "name": "Track My Vehicle Live",
-      "short_name": "Live Bay",
-      "url": "/index.html#trackOrderSection",
-      "description": "Customer live video stream & digital job card"
-    },
-    {
-      "name": "OBD Diagnostic AI Lab",
-      "short_name": "OBD AI",
-      "url": "/index.html#engine1Tab",
-      "description": "25-Year master OBD-II scanner & wiring telemetry"
+      "type": "image/png"
     }
   ]
 }

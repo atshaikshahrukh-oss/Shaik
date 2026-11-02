@@ -405,6 +405,90 @@
     }
 
     renderCustPortfolio('all');
-  </script>
+  
+
+window.showBookingConfirmationPopup = function(bookingDetails) {
+  const modal = document.getElementById('bookingConfirmModal');
+  if (!modal) return;
+  const bidEl = document.getElementById('confirmModalBookingId');
+  const catEl = document.getElementById('confirmModalCategory');
+  const waBtn = document.getElementById('confirmModalWhatsappBtn');
+
+  const bId = 'CCM-2024-' + Math.floor(100 + Math.random() * 900);
+  if (bidEl) bidEl.textContent = '#' + bId;
+  if (catEl) catEl.textContent = bookingDetails.category || (window.currentPlatformMode === '2w' ? '2-Wheeler' : '4-Wheeler');
+
+  const waText = `*BOOKING CONFIRMED - CC MOTOCRAFTS*%0A*Booking ID:* ${bId}%0A*Customer:* ${bookingDetails.name}%0A*Vehicle:* ${bookingDetails.model}%0A*Location:* ${bookingDetails.location || 'Hyderabad'}%0A*Dispatch Window:* 35-45 Mins (VIP) / 45 Mins-1 Hr (Other Areas)%0AThank you for choosing CC Motocrafts AI Engine Labs.`;
+  if (waBtn) waBtn.href = `https://wa.me/918333007351?text=${waText}`;
+
+  modal.style.display = 'flex';
+  modal.classList.add('active');
+
+  // Trigger sound effect
+  if (typeof playToolSound === 'function') playToolSound('confirm', 'Torque');
+};
+
+window.closeBookingConfirmModal = function() {
+  const modal = document.getElementById('bookingConfirmModal');
+  if (modal) {
+    modal.style.display = 'none';
+    modal.classList.remove('active');
+  }
+};
+
+</script>
+
+  <!-- ========================================================================
+       POST-BOOKING CONFIRMATION MODAL (VIP ETA 35-45 MIN & CANCELLATION PROTOCOL)
+       ======================================================================== -->
+  <div id="bookingConfirmModal" class="modal-overlay" style="z-index: 2500;">
+    <div class="cyber-modal" style="max-width: 540px; border: 2px solid var(--success); padding: 22px;">
+      <button class="modal-close-btn" onclick="closeBookingConfirmModal()">&times;</button>
+      
+      <div style="text-align: center; margin-bottom: 14px;">
+        <span style="font-size: 34px;">✅</span>
+        <h3 style="color: #00e676; font-size: 21px; margin: 4px 0;">Booking Successfully Confirmed!</h3>
+        <small style="color: var(--text-muted); font-size: 11px;">BOOKING ID: <strong id="confirmModalBookingId" style="color:#fff;">#CCM-2024-942</strong></small>
+      </div>
+
+      <div style="background: rgba(0, 230, 118, 0.08); border: 1px solid var(--success); padding: 12px 14px; border-radius: 8px; margin-bottom: 14px; font-size: 12.5px; line-height: 1.5;">
+        <strong style="color: #fff;">Thank You for Choosing CC Motocrafts AI Engine Labs!</strong><br>
+        Aapki <span id="confirmModalCategory" style="color:var(--theme-primary); font-weight:800;">2-Wheeler</span> booking register ho gayi hai aur workshop dispatch team ko alert bhej diya gaya hai.
+      </div>
+
+      <!-- Dispatch ETA Based on Location -->
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px;">
+        <div style="background: rgba(0,0,0,0.45); border: 1px solid var(--success); padding: 10px 12px; border-radius: 6px;">
+          <span style="font-size: 10.5px; color: var(--success); font-weight: 800; font-family: var(--font-mono);">⭐ VIP CORRIDORS</span>
+          <div style="font-size: 11px; color: #fff; font-weight: 700; margin-top: 2px;">Alkapur, Manikonda, Puppalguda, Mehdipatnam</div>
+          <div style="font-size: 12px; color: #00e676; font-weight: 800; margin-top: 4px;">🚀 Team Dispatch: 35 to 45 Mins</div>
+        </div>
+        <div style="background: rgba(0,0,0,0.45); border: 1px solid var(--theme-primary); padding: 10px 12px; border-radius: 6px;">
+          <span style="font-size: 10.5px; color: var(--theme-primary); font-weight: 800; font-family: var(--font-mono);">📍 ALL OVER HYDERABAD</span>
+          <div style="font-size: 11px; color: #fff; font-weight: 700; margin-top: 2px;">Hitec City, Gachibowli, Banjara Hills, Secunderabad, etc.</div>
+          <div style="font-size: 12px; color: var(--theme-primary); font-weight: 800; margin-top: 4px;">⏱️ Max Window: 45 Mins - 1 Hour</div>
+        </div>
+      </div>
+
+      <!-- Cancellation Policy Protocol -->
+      <div style="background: rgba(255, 179, 0, 0.08); border: 1px solid var(--warning); padding: 10px 12px; border-radius: 6px; font-size: 11px; color: var(--text-muted); margin-bottom: 16px; line-height: 1.45;">
+        <strong style="color: var(--warning);">⚠️ Cancellation Terms (Post-Dispatch Only):</strong><br>
+        • <strong>2-Wheeler VIP Corridor Cancellation:</strong> ₹300/-<br>
+        • <strong>4-Wheeler VIP Corridor Cancellation:</strong> ₹500/- (Hydraulic Flatbed Ramp fee)<br>
+        • <strong>All Over Hyderabad Other Areas Cancellation:</strong> Flat ₹500/- standard logistics charge.
+      </div>
+
+      <!-- Multi-Channel Actions -->
+      <div style="display: flex; gap: 8px;">
+        <a id="confirmModalWhatsappBtn" href="#" target="_blank" class="btn-cyber-solid" style="flex: 1; padding: 10px; justify-content: center; background: #25D366; border-color: #25D366; color: #000; font-weight: 800; text-decoration: none;">
+          💬 Open WhatsApp Dispatch
+        </a>
+        <button class="btn-cyber" style="padding: 10px 14px;" onclick="closeBookingConfirmModal(); navigateToPage('booking');">
+          🛒 Track Gadi
+        </button>
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>

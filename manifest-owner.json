@@ -1,0 +1,22 @@
+{
+  "name": "CC MOTOCRAFTS | Owner Central AI Command",
+  "short_name": "CC Owner",
+  "description": "Shahrukh's Executive Control: Lead allocation, partner management, tracking permissions, and Hindi Voice AI.",
+  "start_url": "owner.html",
+  "display": "standalone",
+  "background_color": "#0a0802",
+  "theme_color": "#ffb300",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "assets/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}

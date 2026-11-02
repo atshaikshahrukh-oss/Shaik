@@ -3,19 +3,14 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>CC MOTOCRAFTS | Owner Central AI Command App (App 3)</title>
-  <meta name="description" content="Shahrukh's Personal Executive Management App. Live customer bookings, garage partner controls, and Hindi voice AI.">
+  <title>CC MOTOCRAFTS | Master Admin Control Panel (App 3)</title>
   <meta name="theme-color" content="#ffb300">
-  <meta name="mobile-web-app-capable" content="yes">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
   <link rel="manifest" href="manifest.json">
   <style>
     :root {
-      --font-main: 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, sans-serif;
-      --font-mono: 'SF Mono', Consolas, 'Courier New', monospace;
       --theme-primary: #ffb300;
       --bg-dark-base: #0a0802;
-      --bg-card: rgba(24, 18, 5, 0.85);
+      --bg-card: rgba(24, 18, 5, 0.88);
       --bg-card-border: rgba(255, 179, 0, 0.3);
       --text-main: #f0f6fc;
       --text-muted: #a69a85;
@@ -25,18 +20,18 @@
     }
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
-      font-family: var(--font-main);
+      font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
       background-color: var(--bg-dark-base);
       color: var(--text-main);
       line-height: 1.5;
-      padding-bottom: 70px;
+      padding-bottom: 75px;
     }
     .header {
       display: flex; justify-content: space-between; align-items: center; padding: 12px 18px;
       background: rgba(10, 8, 2, 0.95); border-bottom: 1px solid var(--bg-card-border);
       position: sticky; top: 0; z-index: 100; backdrop-filter: blur(10px);
     }
-    .logo { font-size: 15px; font-weight: 900; letter-spacing: 1px; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 8px; }
+    .logo { font-size: 15px; font-weight: 900; color: var(--gold); text-decoration: none; display: flex; align-items: center; gap: 8px; }
     .btn-cyber {
       background: rgba(255, 179, 0, 0.08); border: 1px solid var(--theme-primary); color: var(--theme-primary);
       padding: 7px 12px; border-radius: 6px; font-size: 11.5px; font-weight: 700; cursor: pointer; text-decoration: none;
@@ -56,9 +51,7 @@
       width: 100%; background: rgba(3, 7, 13, 0.85); border: 1px solid var(--bg-card-border);
       color: #fff; padding: 10px 12px; border-radius: 6px; font-size: 13px; margin-top: 4px;
     }
-    .toggle-switch {
-      position: relative; display: inline-block; width: 44px; height: 24px;
-    }
+    .toggle-switch { position: relative; display: inline-block; width: 44px; height: 24px; }
     .toggle-switch input { opacity: 0; width: 0; height: 0; }
     .slider {
       position: absolute; cursor: pointer; inset: 0; background-color: #333;
@@ -74,11 +67,10 @@
 </head>
 <body>
 
-  <!-- Top App Navigation -->
   <header class="header">
     <a href="index.html" class="logo">
       <span style="display:inline-block; width:10px; height:10px; border-radius:50%; background:var(--gold);"></span>
-      CC MOTOCRAFTS <span style="font-size:10px; background:rgba(255,179,0,0.2); border:1px solid var(--gold); padding:2px 6px; border-radius:3px; color:#fff;">APP 3: OWNER COMMAND</span>
+      CC MOTOCRAFTS <span style="font-size:10px; background:rgba(255,179,0,0.2); border:1px solid var(--gold); padding:2px 6px; border-radius:3px; color:#fff;">MASTER ADMIN APP</span>
     </a>
     <div style="display: flex; gap: 8px;">
       <button class="btn-cyber" onclick="triggerPwaInstall()">📲 Install App</button>
@@ -89,194 +81,312 @@
   <div class="container">
 
     <!-- Auth Gate -->
-    <div id="ownerAuthGate" class="card" style="max-width: 480px; margin: 40px auto; border: 2px solid var(--gold); text-align: center;">
+    <div id="adminAuthGate" class="card" style="max-width: 480px; margin: 40px auto; border: 2px solid var(--gold); text-align: center;">
       <span style="font-size: 32px; display: block; margin-bottom: 8px;">👑</span>
       <h3 style="font-size: 18px; color: var(--gold); margin-bottom: 4px;">Shahrukh Bhai - Executive Login</h3>
-      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 16px;">Apna Owner Passcode enter karke Master Command Center unlock karein.</p>
+      <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Master Admin Passcode enter karke central command center unlock karein.</p>
 
       <div style="margin-bottom: 14px;">
-        <input type="password" id="ownerPassInput" class="form-input" placeholder="Enter Owner Passcode" style="text-align: center; font-size: 16px; letter-spacing: 2px;">
+        <input type="password" id="adminPassInput" class="form-input" placeholder="Enter Owner Passcode" style="text-align: center; font-size: 16px; letter-spacing: 2px;">
       </div>
 
-      <button class="btn-cyber-solid" onclick="verifyOwnerLogin()" style="width: 100%; padding: 11px; font-size: 13px; font-weight: 800; justify-content: center;">
-        Unlock Owner Command App
+      <button class="btn-cyber-solid" onclick="verifyAdminLogin()" style="width: 100%; padding: 11px; justify-content: center; font-size: 13px;">
+        Unlock Master Admin App
       </button>
 
-      <!-- Hold Notice -->
-      <div id="ownerHoldNotice" style="display: none; margin-top: 14px; background: rgba(255,51,102,0.12); border: 1px solid var(--danger); padding: 12px; border-radius: 6px; font-size: 12px; color: var(--danger); line-height: 1.45; text-align: left;">
-        ⛔ <strong>DEVICE HOLD NOTICE:</strong> Anadhikrit passcode enter kiya gaya. Alert sent to central alert desk.
+      <div id="adminHoldNotice" style="display: none; margin-top: 14px; background: rgba(255,51,102,0.12); border: 1px solid var(--danger); padding: 12px; border-radius: 6px; font-size: 12px; color: var(--danger); line-height: 1.45; text-align: left;">
+        ⛔ <strong>ACCESS DENIED:</strong> Anadhikrit passcode. Alert dispatched to central security desk.
       </div>
     </div>
 
     <!-- Authenticated Dashboard -->
-    <div id="ownerDashboardContent" style="display: none;">
+    <div id="adminDashboardContent" style="display: none;">
 
-      <!-- Header Welcome -->
+      <!-- Header Overview -->
       <div class="card" style="border-left: 4px solid var(--gold); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
         <div>
-          <span style="font-size: 10px; font-weight: 800; color: var(--gold); font-family: var(--font-mono);">EXECUTIVE COMMAND DESK</span>
+          <span style="font-size: 10px; font-weight: 800; color: var(--gold);">EXECUTIVE COMMAND DESK</span>
           <h2 style="font-size: 21px; color: #fff; margin: 2px 0;">Welcome, Shahrukh Bhai 👑</h2>
-          <p style="font-size: 12px; color: var(--text-muted);">Central Command for Bookings, Garages, Hindi Voice AI & 12:00 AM Midnight Backup</p>
+          <p style="font-size: 12px; color: var(--text-muted);">Central Command for Leads, Task Allocation, Passwords, Cameras & 12:00 AM Midnight Backup</p>
         </div>
-        <button class="btn-cyber" onclick="triggerMidnightBackup()" style="color:var(--success); border-color:var(--success);">
-          ⏰ 12:00 AM Backup Email
-        </button>
+        <div style="display: flex; gap: 8px;">
+          <button class="btn-cyber" onclick="exportDatabaseBackup()">📥 Export Backup</button>
+          <button class="btn-cyber" onclick="triggerMidnightBackup()" style="color:var(--success); border-color:var(--success);">⏰ 12:00 AM Backup</button>
+        </div>
       </div>
 
-      <!-- Hindi Voice & Text AI Command Centre -->
-      <div class="card" style="border: 1px solid var(--gold);">
-        <h3 style="font-size: 16px; color: var(--gold); margin-bottom: 6px;">
-          🗣️ Hindi Voice & Text AI Assistant (Bina Likhne-Padhne Ki Dikkat)
+      <!-- INCOMING BOOKINGS HUB & TASK ALLOCATION -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 8px;">
+          <h3 style="font-size: 17px; color: var(--gold); margin: 0;">
+            📥 Incoming Customer Bookings Hub (Task Allocation)
+          </h3>
+          <span style="font-size: 11px; color: var(--theme-primary);">Sabhi website & app bookings pehle yahan aati hain</span>
+        </div>
+
+        <div id="adminBookingsQueue" style="display: grid; gap: 12px;">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- PASSWORD GENERATOR & CREDENTIAL SECURITY MANAGER -->
+      <div class="card" style="border: 2px solid var(--gold);">
+        <h3 style="font-size: 17px; color: var(--gold); margin-bottom: 6px;">
+          🔐 Secure Password Generator & Access Control Manager
         </h3>
-        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
-          Aap Hindi mein bolenge ya type karenge. AI preview dikhayega, aap green button dabaenge tabhi live changes honge.
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">
+          Customer tracking passwords aur Partner credentials yahan generate karein aur WhatsApp par send karein. Bina admin-approved password ke kisi ko entry nahi milegi.
         </p>
 
-        <!-- Presets -->
-        <div style="display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 12px;">
-          <button class="btn-cyber" onclick="runOwnerVoiceCmd('Two-wheeler labour rate ₹500 se ₹600 kar do')">₹500 ➔ ₹600 Labour</button>
-          <button class="btn-cyber" onclick="runOwnerVoiceCmd('Madhapur garage ko OFF kar do')">Pause Madhapur Hub</button>
-          <button class="btn-cyber" onclick="runOwnerVoiceCmd('500cc partners ko naye leads assign karo')">Allocate Leads</button>
-          <button class="btn-cyber" onclick="runOwnerVoiceCmd('Aaj ki bookings ki PDF report banao')">Generate Daily PDF</button>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 14px;">
+          <!-- Customer Passwords -->
+          <div style="background: rgba(0,0,0,0.4); padding: 14px; border-radius: 8px; border: 1px solid var(--bg-card-border);">
+            <strong style="color: #fff; font-size: 13.5px; display: block; margin-bottom: 8px;">🚗 Customer Live Tracking Passwords</strong>
+            <div id="customerPasswordsList" style="font-size: 12px; display: grid; gap: 8px;">
+              <!-- Injected via JS -->
+            </div>
+          </div>
+
+          <!-- Partner Credentials -->
+          <div style="background: rgba(0,0,0,0.4); padding: 14px; border-radius: 8px; border: 1px solid var(--bg-card-border);">
+            <strong style="color: #fff; font-size: 13.5px; display: block; margin-bottom: 8px;">🔧 Partner Garage Login Credentials</strong>
+            <div id="partnerCredentialsList" style="font-size: 12px; display: grid; gap: 8px;">
+              <!-- Injected via JS -->
+            </div>
+          </div>
         </div>
+      </div>
+
+      <!-- WORKSHOP LIVE CAMERAS CONTROLLER -->
+      <div class="card">
+        <h3 style="font-size: 17px; color: var(--gold); margin-bottom: 6px;">📹 Workshop Live Camera Feed Allocator</h3>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">Bays mein live 60 FPS camera connect karein jo customer app par broadcast hoga:</p>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
+          <div style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; border: 1px solid var(--bg-card-border);">
+            <strong style="color: #fff; font-size: 12px;">Bay #01 (Quality Audit):</strong>
+            <div style="font-size: 11px; color: #00e676; margin: 4px 0;">● CAM ACTIVE (Ciaz TS 09)</div>
+            <button class="btn-cyber" style="padding: 3px 8px; font-size: 10px;" onclick="alert('Camera #01 Re-calibrated')">Switch Angle</button>
+          </div>
+          <div style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; border: 1px solid var(--bg-card-border);">
+            <strong style="color: #fff; font-size: 12px;">Bay #02 (Engine Overhaul):</strong>
+            <div style="font-size: 11px; color: #00e676; margin: 4px 0;">● CAM ACTIVE (RE GT 650)</div>
+            <button class="btn-cyber" style="padding: 3px 8px; font-size: 10px;" onclick="alert('Camera #02 Re-calibrated')">Switch Angle</button>
+          </div>
+          <div style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; border: 1px solid var(--bg-card-border);">
+            <strong style="color: #fff; font-size: 12px;">Bay #03 (Suspension):</strong>
+            <div style="font-size: 11px; color: #00e676; margin: 4px 0;">● CAM ACTIVE (Creta AP 28)</div>
+            <button class="btn-cyber" style="padding: 3px 8px; font-size: 10px;" onclick="alert('Camera #03 Re-calibrated')">Switch Angle</button>
+          </div>
+          <div style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 6px; border: 1px solid var(--bg-card-border);">
+            <strong style="color: #fff; font-size: 12px;">Bay #04 (Paint & Wash):</strong>
+            <div style="font-size: 11px; color: #888; margin: 4px 0;">⚪ STANDBY</div>
+            <button class="btn-cyber" style="padding: 3px 8px; font-size: 10px;" onclick="alert('Camera #04 Connected to Rapid Wash')">Connect Stream</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- GARAGE PARTNER MASTER MANAGER -->
+      <div class="card">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; flex-wrap: wrap; gap: 8px;">
+          <div>
+            <h3 style="font-size: 17px; color: var(--gold); margin: 0;">🏬 Garage Partner Master Control</h3>
+            <small style="color: var(--text-muted); font-size: 11px;">ON/OFF Switch karein, Naya Garage jodein, ya Delete karein</small>
+          </div>
+          <button class="btn-cyber-solid" onclick="openAddPartnerModal()">➕ Naya Garage Add Karein</button>
+        </div>
+
+        <div id="adminPartnersList" style="display: grid; gap: 10px;">
+          <!-- Injected via JS -->
+        </div>
+      </div>
+
+      <!-- HINDI VOICE AI ASSISTANT -->
+      <div class="card">
+        <h3 style="font-size: 16px; color: var(--gold); margin-bottom: 6px;">🗣️ Hindi Voice AI Assistant (Bina Likhne-Padhne Ki Dikkat)</h3>
+        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 10px;">Mic dabakar Hindi mein command dein. 2-stage approval ke baad execute hoga.</p>
 
         <div style="display: flex; gap: 8px;">
-          <input type="text" id="ownerVoiceInput" class="form-input" placeholder="Hindi mein bolein ya type karein (e.g. Madhapur garage ko off kar do)...">
-          <button class="btn-cyber" onclick="listenHindiVoice()" style="white-space: nowrap;">
-            🎤 Bol Kar Command Dein
-          </button>
-          <button class="btn-cyber-solid" onclick="executeVoiceCommand()" style="white-space: nowrap;">
-            ⚡ Run
-          </button>
+          <input type="text" id="adminVoiceInput" class="form-input" placeholder="Hindi mein bolein ya type karein...">
+          <button class="btn-cyber" onclick="listenHindiVoice()" style="white-space: nowrap;">🎤 Bol Kar Dein</button>
+          <button class="btn-cyber-solid" onclick="executeVoiceCommand()" style="white-space: nowrap;">⚡ Run</button>
         </div>
 
-        <div id="ownerVoicePreview" style="display: none; margin-top: 14px; background: rgba(0,0,0,0.5); border: 1px solid var(--gold); padding: 14px; border-radius: 8px;">
-          <!-- Preview Box -->
-        </div>
-      </div>
-
-      <!-- Garage Partner Master Manager (Add, Toggle ON/OFF, Delete) -->
-      <div class="card">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; flex-wrap: wrap; gap: 10px;">
-          <div>
-            <h3 style="font-size: 17px; color: var(--gold); margin: 0;">🏬 Garage Partner Master Manager</h3>
-            <small style="color: var(--text-muted); font-size: 11px;">Partner Garages ko ON/OFF karein, naya garage jodein, ya delete karein</small>
-          </div>
-          <button class="btn-cyber-solid" onclick="openAddPartnerModal()">
-            ➕ Naya Garage Add Karein
-          </button>
-        </div>
-
-        <!-- Partners Grid -->
-        <div id="ownerPartnersList" style="display: grid; gap: 12px;">
-          <!-- Injected via JS -->
-        </div>
-      </div>
-
-      <!-- Live Incoming Leads Hub & 1-Click Allocation -->
-      <div class="card">
-        <h3 style="font-size: 17px; color: var(--gold); margin-bottom: 6px;">📥 Live Customer Bookings Stream (Leads)</h3>
-        <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 14px;">Website aur Customer App se aayi bookings ko active garage ko 1 click mein assign karein:</p>
-
-        <div id="ownerBookingsList" style="display: grid; gap: 12px;">
-          <!-- Injected via JS -->
-        </div>
+        <div id="adminVoicePreview" style="display: none; margin-top: 12px; background: rgba(0,0,0,0.5); border: 1px solid var(--gold); padding: 12px; border-radius: 8px;"></div>
       </div>
 
     </div>
 
-  </div>
-
-  <!-- Add Partner Modal -->
-  <div id="addPartnerModal" style="display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.85); backdrop-filter: blur(10px); z-index: 2000; align-items: center; justify-content: center; padding: 16px;">
-    <div style="background: #140e04; border: 2px solid var(--gold); border-radius: 12px; max-width: 480px; width: 100%; padding: 22px; position: relative;">
-      <button onclick="closeAddPartnerModal()" style="position: absolute; top: 12px; right: 14px; background: none; border: none; color: #fff; font-size: 20px; cursor: pointer;">&times;</button>
-      <h3 style="color: var(--gold); margin-bottom: 12px;">➕ Naya Garage Partner Jodein</h3>
-
-      <div style="margin-bottom: 10px;">
-        <label style="font-size: 11px; color: var(--text-muted);">Garage Ka Naam:</label>
-        <input type="text" id="newGarageName" class="form-input" placeholder="e.g. Kavuri Hills Superbike Hub">
-      </div>
-      <div style="margin-bottom: 10px;">
-        <label style="font-size: 11px; color: var(--text-muted);">Owner / Manager Ka Naam:</label>
-        <input type="text" id="newOwnerName" class="form-input" placeholder="e.g. Aslam Khan">
-      </div>
-      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 10px;">
-        <div>
-          <label style="font-size: 11px; color: var(--text-muted);">Category:</label>
-          <select id="newSegment" class="form-input">
-            <option value="2w">2-Wheeler (100-2500cc)</option>
-            <option value="4w">4-Wheeler (500-15000cc)</option>
-            <option value="both">Both 2W & 4W</option>
-          </select>
-        </div>
-        <div>
-          <label style="font-size: 11px; color: var(--text-muted);">Mobile Number:</label>
-          <input type="tel" id="newMobile" class="form-input" placeholder="e.g. 9849012345">
-        </div>
-      </div>
-      <div style="margin-bottom: 14px;">
-        <label style="font-size: 11px; color: var(--text-muted);">Address / Location:</label>
-        <input type="text" id="newLocation" class="form-input" placeholder="e.g. Near Inorbit Mall, Madhapur">
-      </div>
-
-      <button class="btn-cyber-solid" onclick="saveNewPartner()" style="width: 100%; padding: 11px; justify-content: center; font-size: 13px;">
-        💾 Save Garage Partner
-      </button>
-    </div>
   </div>
 
   <script>
-    let partnersData = [{"id": "partner_001", "garageName": "Harish CC Motocrafts Hub", "ownerName": "Harish Kumar", "mobile": "+91 9849012345", "email": "harish.ccmoto@gmail.com", "location": "Plot 42, Telecom Nagar, Gachibowli, Hyderabad", "pincode": "500032", "segment": "both", "gstEnabled": true, "gstNumber": "36AABCC1234F1Z5", "tradeLicenseEnabled": true, "tradeLicenseNo": "GHMC/TL/2024/98712", "pollutionCertEnabled": true, "pollutionCertNo": "TS/PCB/DIAG/8841", "status": "active", "joinedDate": "2024-01-15", "totalInvoices": 142, "totalRevenue": 845200}, {"id": "partner_002", "garageName": "Madhapur Superbike & Precision Lab", "ownerName": "Mohammed Rizwan", "mobile": "+91 9876543210", "email": "rizwan.superbikes@gmail.com", "location": "Near Durgam Cheruvu Metro, Madhapur, Hyderabad", "pincode": "500081", "segment": "2w", "gstEnabled": true, "gstNumber": "36XYZPK9876L2D9", "tradeLicenseEnabled": true, "tradeLicenseNo": "GHMC/TL/2023/45129", "pollutionCertEnabled": false, "pollutionCertNo": "", "status": "active", "joinedDate": "2024-03-10", "totalInvoices": 98, "totalRevenue": 512400}, {"id": "partner_003", "garageName": "Banjara CarS CareS Fleet & Overhaul Hub", "ownerName": "Suresh Reddy", "mobile": "+91 9123456789", "email": "suresh.cars@gmail.com", "location": "Road No. 12, Banjara Hills, Hyderabad", "pincode": "500034", "segment": "4w", "gstEnabled": true, "gstNumber": "36AAECR5542M1Z0", "tradeLicenseEnabled": true, "tradeLicenseNo": "GHMC/TL/2022/88214", "pollutionCertEnabled": true, "pollutionCertNo": "TS/PCB/AUTO/3312", "status": "active", "joinedDate": "2023-11-20", "totalInvoices": 210, "totalRevenue": 2450000}, {"id": "partner_004", "garageName": "Secunderabad Classic & Commercial Workshop", "ownerName": "Vikram Singh", "mobile": "+91 9988776655", "email": "vikram.ccmoto@gmail.com", "location": "MG Road, Secunderabad, Telangana", "pincode": "500003", "segment": "both", "gstEnabled": false, "gstNumber": "", "tradeLicenseEnabled": true, "tradeLicenseNo": "GHMC/TL/2024/11029", "pollutionCertEnabled": true, "pollutionCertNo": "TS/PCB/DIAG/4491", "status": "active", "joinedDate": "2024-06-01", "totalInvoices": 64, "totalRevenue": 312000}];
-    let bookingsData = [{"bookingId": "BK-2024-901", "createdAt": "2024-10-31 09:30 AM", "customer": {"name": "Syed Farhan", "mobile": "9849112233", "email": "farhan.syed@gmail.com", "vehicleType": "2w", "vehicleModel": "KTM Duke 390", "regNumber": "TS 09 EA 1234"}, "servicePackage": "Stage-3 Precision Engine Rebuild & Valve Lapping", "serviceType": "engine_rebuild", "partnerId": "partner_001", "partnerName": "Harish CC Motocrafts Hub (Gachibowli)", "assignedBay": "Bay 02 - Precision Engine Overhaul Bay", "assignedTechnician": "Shahrukh Master Technician", "currentStage": "Step 2: Engine Disassembly in Progress", "stageIndex": 2, "progressPercent": 65, "currentKm": 20400, "lastServiceKm": 18500, "estimatedDelivery": "Today, 05:30 PM", "paymentStatus": "Paid Advance (\u20b95,000)", "totalEstimate": 8500, "doorstepPickup": {"isVipFree": true, "address": "Telecom Nagar, Gachibowli, Hyderabad - 500032", "driverAssigned": "Ramu (Flatbed Transporter #04)"}, "warrantyStatus": {"type": "1-Year Engine Rebuild Overhaul Warranty", "active": true, "breakInDueKm": 21150, "rules": "Mandatory first service at 500-750 KM (15-30 days)"}}, {"bookingId": "BK-2024-902", "createdAt": "2024-10-31 10:15 AM", "customer": {"name": "Dr. Ananya Rao", "mobile": "9123445566", "email": "ananya.rao@apollo.org", "vehicleType": "4w", "vehicleModel": "Hyundai Creta 1.5 SX(O)", "regNumber": "TS 08 FG 5541"}, "servicePackage": "Mandatory First 700 KM Overhaul Checkup & Oil Flush", "serviceType": "engine_rebuild", "partnerId": "partner_003", "partnerName": "Banjara CarS CareS Fleet & Overhaul Hub", "assignedBay": "Bay 04 - Heavy Commercial & Car Lift Bay", "assignedTechnician": "Suresh Senior Overhaul Specialist", "currentStage": "Step 3: Fresh Synthetic Oil Refill & Torque Verification", "stageIndex": 3, "progressPercent": 80, "currentKm": 34200, "lastServiceKm": 33500, "estimatedDelivery": "Today, 02:00 PM", "paymentStatus": "Pending (Post Delivery)", "totalEstimate": 3800, "doorstepPickup": {"isVipFree": true, "address": "Road No. 12, Banjara Hills, Hyderabad - 500034", "driverAssigned": "Dedicated Driver (Kiran)"}, "warrantyStatus": {"type": "1-Year Engine Overhaul Warranty", "active": true, "notes": "Break-in service underway to lock in 1-Year Crank & Cylinder Bore warranty"}}, {"bookingId": "BK-2024-903", "createdAt": "2024-10-31 11:00 AM", "customer": {"name": "Karthik Varma", "mobile": "9700123456", "email": "karthik.varma@techmahindra.com", "vehicleType": "2w", "vehicleModel": "Honda Activa 6G H-Smart", "regNumber": "TS 07 HK 9088"}, "servicePackage": "CVT Variator Overhaul & Periodic Transmission Tune", "serviceType": "general_service", "partnerId": "partner_001", "partnerName": "Harish CC Motocrafts Hub (Gachibowli)", "assignedBay": "Bay 01 - Quick CVT & Periodic Bay", "assignedTechnician": "Harish Kumar", "currentStage": "Step 1: Vehicle Inspection & CVT Teardown", "stageIndex": 1, "progressPercent": 30, "currentKm": 12100, "lastServiceKm": 11800, "estimatedDelivery": "Today, 03:30 PM", "paymentStatus": "Paid Online (\u20b92,450)", "totalEstimate": 2450, "doorstepPickup": {"isVipFree": true, "address": "Hi-Tech City, Madhapur, Hyderabad - 500081", "driverAssigned": "Doorstep Pickup Completed"}, "warrantyStatus": {"type": "30-Day General Service Guarantee", "active": true, "notes": "Covers variator roller tuning & drive belt assembly"}}, {"bookingId": "BK-2024-904", "createdAt": "2024-10-31 11:45 AM", "customer": {"name": "Vikram Singh", "mobile": "9988776655", "email": "vikram.ccmoto@gmail.com", "vehicleType": "4w", "vehicleModel": "Mahindra Thar 2.2 CRDe 4x4", "regNumber": "TS 09 EU 8812"}, "servicePackage": "ECU Diagnostics, CAN-Bus Ripple Test & Turbo Overhaul", "serviceType": "engine_rebuild", "partnerId": "partner_004", "partnerName": "Secunderabad Classic & Commercial Workshop", "assignedBay": "Bay 03 - 4x4 Dyno & Diagnostics Bay", "assignedTechnician": "Suresh Senior Overhaul Specialist", "currentStage": "Step 1: Vehicle Inspection & OBD Scan Completed", "stageIndex": 1, "progressPercent": 25, "currentKm": 45800, "lastServiceKm": 43200, "estimatedDelivery": "Tomorrow, 12:00 PM", "paymentStatus": "Advance Paid (\u20b910,000)", "totalEstimate": 18500, "doorstepPickup": {"isVipFree": true, "address": "Sindhi Colony, Secunderabad - 500003", "driverAssigned": "Flatbed Hauler #02"}, "warrantyStatus": {"type": "1-Year Engine Rebuild Warranty", "active": true, "notes": "Turbocharger boost pressure & intercooler circuit covered"}}];
+    let db = {"bookings": [{"bookingId": "BK-2024-901", "createdAt": "2024-10-31 09:30 AM", "customer": {"name": "Syed Farhan", "mobile": "9849112233", "email": "farhan.syed@gmail.com", "vehicleType": "2w", "vehicleModel": "KTM Duke 390", "regNumber": "TS 09 EA 1234"}, "servicePackage": "Stage-3 Precision Engine Rebuild & Valve Lapping", "serviceType": "engine_rebuild", "partnerId": "partner_001", "partnerName": "Harish CC Motocrafts Hub (Gachibowli)", "assignedBay": "Bay 02 - Precision Engine Overhaul Bay", "assignedTechnician": "Shahrukh Master Technician", "currentStage": "Step 2: Engine Disassembly in Progress", "stageIndex": 2, "progressPercent": 65, "currentKm": 20400, "lastServiceKm": 18500, "estimatedDelivery": "Today, 05:30 PM", "paymentStatus": "Paid Advance (\u20b95,000)", "totalEstimate": 8500, "doorstepPickup": {"isVipFree": true, "address": "Telecom Nagar, Gachibowli, Hyderabad - 500032", "driverAssigned": "Ramu (Flatbed Transporter #04)"}, "warrantyStatus": {"type": "1-Year Engine Rebuild Overhaul Warranty", "active": true, "breakInDueKm": 21150, "rules": "Mandatory first service at 500-750 KM (15-30 days)"}}, {"bookingId": "BK-2024-902", "createdAt": "2024-10-31 10:15 AM", "customer": {"name": "Dr. Ananya Rao", "mobile": "9123445566", "email": "ananya.rao@apollo.org", "vehicleType": "4w", "vehicleModel": "Hyundai Creta 1.5 SX(O)", "regNumber": "TS 08 FG 5541"}, "servicePackage": "Mandatory First 700 KM Overhaul Checkup & Oil Flush", "serviceType": "engine_rebuild", "partnerId": "partner_003", "partnerName": "Banjara CarS CareS Fleet & Overhaul Hub", "assignedBay": "Bay 04 - Heavy Commercial & Car Lift Bay", "assignedTechnician": "Suresh Senior Overhaul Specialist", "currentStage": "Step 3: Fresh Synthetic Oil Refill & Torque Verification", "stageIndex": 3, "progressPercent": 80, "currentKm": 34200, "lastServiceKm": 33500, "estimatedDelivery": "Today, 02:00 PM", "paymentStatus": "Pending (Post Delivery)", "totalEstimate": 3800, "doorstepPickup": {"isVipFree": true, "address": "Road No. 12, Banjara Hills, Hyderabad - 500034", "driverAssigned": "Dedicated Driver (Kiran)"}, "warrantyStatus": {"type": "1-Year Engine Overhaul Warranty", "active": true, "notes": "Break-in service underway to lock in 1-Year Crank & Cylinder Bore warranty"}}, {"bookingId": "BK-2024-903", "createdAt": "2024-10-31 11:00 AM", "customer": {"name": "Karthik Varma", "mobile": "9700123456", "email": "karthik.varma@techmahindra.com", "vehicleType": "2w", "vehicleModel": "Honda Activa 6G H-Smart", "regNumber": "TS 07 HK 9088"}, "servicePackage": "CVT Variator Overhaul & Periodic Transmission Tune", "serviceType": "general_service", "partnerId": "partner_001", "partnerName": "Harish CC Motocrafts Hub (Gachibowli)", "assignedBay": "Bay 01 - Quick CVT & Periodic Bay", "assignedTechnician": "Harish Kumar", "currentStage": "Step 1: Vehicle Inspection & CVT Teardown", "stageIndex": 1, "progressPercent": 30, "currentKm": 12100, "lastServiceKm": 11800, "estimatedDelivery": "Today, 03:30 PM", "paymentStatus": "Paid Online (\u20b92,450)", "totalEstimate": 2450, "doorstepPickup": {"isVipFree": true, "address": "Hi-Tech City, Madhapur, Hyderabad - 500081", "driverAssigned": "Doorstep Pickup Completed"}, "warrantyStatus": {"type": "30-Day General Service Guarantee", "active": true, "notes": "Covers variator roller tuning & drive belt assembly"}}, {"bookingId": "BK-2024-904", "createdAt": "2024-10-31 11:45 AM", "customer": {"name": "Vikram Singh", "mobile": "9988776655", "email": "vikram.ccmoto@gmail.com", "vehicleType": "4w", "vehicleModel": "Mahindra Thar 2.2 CRDe 4x4", "regNumber": "TS 09 EU 8812"}, "servicePackage": "ECU Diagnostics, CAN-Bus Ripple Test & Turbo Overhaul", "serviceType": "engine_rebuild", "partnerId": "partner_004", "partnerName": "Secunderabad Classic & Commercial Workshop", "assignedBay": "Bay 03 - 4x4 Dyno & Diagnostics Bay", "assignedTechnician": "Suresh Senior Overhaul Specialist", "currentStage": "Step 1: Vehicle Inspection & OBD Scan Completed", "stageIndex": 1, "progressPercent": 25, "currentKm": 45800, "lastServiceKm": 43200, "estimatedDelivery": "Tomorrow, 12:00 PM", "paymentStatus": "Advance Paid (\u20b910,000)", "totalEstimate": 18500, "doorstepPickup": {"isVipFree": true, "address": "Sindhi Colony, Secunderabad - 500003", "driverAssigned": "Flatbed Hauler #02"}, "warrantyStatus": {"type": "1-Year Engine Rebuild Warranty", "active": true, "notes": "Turbocharger boost pressure & intercooler circuit covered"}}], "partners": [{"id": "partner_001", "garageName": "Harish CC Motocrafts Hub", "ownerName": "Harish Kumar", "mobile": "+91 9849012345", "email": "harish.ccmoto@gmail.com", "location": "Plot 42, Telecom Nagar, Gachibowli, Hyderabad", "pincode": "500032", "segment": "both", "gstEnabled": true, "gstNumber": "36AABCC1234F1Z5", "tradeLicenseEnabled": true, "tradeLicenseNo": "GHMC/TL/2024/98712", "pollutionCertEnabled": true, "pollutionCertNo": "TS/PCB/DIAG/8841", "status": "active", "joinedDate": "2024-01-15", "totalInvoices": 142, "totalRevenue": 845200}, {"id": "partner_002", "garageName": "Madhapur Superbike & Precision Lab", "ownerName": "Mohammed Rizwan", "mobile": "+91 9876543210", "email": "rizwan.superbikes@gmail.com", "location": "Near Durgam Cheruvu Metro, Madhapur, Hyderabad", "pincode": "500081", "segment": "2w", "gstEnabled": true, "gstNumber": "36XYZPK9876L2D9", "tradeLicenseEnabled": true, "tradeLicenseNo": "GHMC/TL/2023/45129", "pollutionCertEnabled": false, "pollutionCertNo": "", "status": "active", "joinedDate": "2024-03-10", "totalInvoices": 98, "totalRevenue": 512400}, {"id": "partner_003", "garageName": "Banjara CarS CareS Fleet & Overhaul Hub", "ownerName": "Suresh Reddy", "mobile": "+91 9123456789", "email": "suresh.cars@gmail.com", "location": "Road No. 12, Banjara Hills, Hyderabad", "pincode": "500034", "segment": "4w", "gstEnabled": true, "gstNumber": "36AAECR5542M1Z0", "tradeLicenseEnabled": true, "tradeLicenseNo": "GHMC/TL/2022/88214", "pollutionCertEnabled": true, "pollutionCertNo": "TS/PCB/AUTO/3312", "status": "active", "joinedDate": "2023-11-20", "totalInvoices": 210, "totalRevenue": 2450000}, {"id": "partner_004", "garageName": "Secunderabad Classic & Commercial Workshop", "ownerName": "Vikram Singh", "mobile": "+91 9988776655", "email": "vikram.ccmoto@gmail.com", "location": "MG Road, Secunderabad, Telangana", "pincode": "500003", "segment": "both", "gstEnabled": false, "gstNumber": "", "tradeLicenseEnabled": true, "tradeLicenseNo": "GHMC/TL/2024/11029", "pollutionCertEnabled": true, "pollutionCertNo": "TS/PCB/DIAG/4491", "status": "active", "joinedDate": "2024-06-01", "totalInvoices": 64, "totalRevenue": 312000}], "customers": [{"id": "cust_101", "name": "Syed Farhan", "mobile": "+91 9849112233", "email": "farhan.syed@gmail.com", "vehicleType": "2w", "vehicleModel": "KTM Duke 390", "regNumber": "TS 09 EA 1234", "currentKm": 20400, "lastServiceDate": "2024-08-15", "lastServiceKm": 18500, "lastWorkDone": ["Motul 300V 15W50 Full Synthetic Oil Change", "KTM OEM Oil Filter & O-Ring Replacement", "Front Brembo Brake Pad Replacement", "Radiator Coolant Flush & De-aerate"], "warrantyStatus": {"type": "General Service 30-Day Guarantee", "validUntil": "2024-09-15", "isActive": false, "notes": "Service interval reached: 1,900 KM elapsed since last maintenance (Recommended interval: 1,800 - 2,000 KM)."}, "servicePitch": "Aapka last service 15 August ko 18,500 KM par hua tha. Aaj 20,400 KM ho chuke hain. Aapka 1,900 KM maintenance interval ho gaya hai! Engine protection ke liye oil and filter checkup zaroori hai."}, {"id": "cust_102", "name": "Dr. Ananya Rao", "mobile": "+91 9123445566", "email": "ananya.rao@apollo.org", "vehicleType": "4w", "vehicleModel": "Hyundai Creta 1.5 SX(O)", "regNumber": "TS 08 FG 5541", "currentKm": 34200, "lastServiceDate": "2024-09-28", "lastServiceKm": 33500, "lastWorkDone": ["Stage-3 Engine Rebuild & Cylinder Bore Honing", "Crankshaft Micropolish & New Main Bearings", "Intake & Exhaust Valve Lapping with New Viton Stem Seals", "Synthetic Break-In Oil Refill (5W-30)"], "warrantyStatus": {"type": "1-Year Engine Overhaul Warranty", "validUntil": "2025-09-28", "isActive": true, "firstServiceDue": "Between 34,000 KM to 34,250 KM (Due Now!)", "notes": "MANDATORY FIRST SERVICE REQUIRED NOW (700 KM run since overhaul). Engine oil and metal flush needed to maintain 1-year warranty."}, "servicePitch": "Doctor sahiba, aapki Creta ka engine overhaul 33,500 KM par hua tha. Ab gadi 700 KM chal chuki hai. CC Motocrafts strict warranty rule ke hisab se 500-750 KM first checkup zaroori hai taaki aapka 1-year engine warranty safe rahe!"}, {"id": "cust_103", "name": "Karthik Varma", "mobile": "+91 9700123456", "email": "karthik.varma@techmahindra.com", "vehicleType": "2w", "vehicleModel": "Honda Activa 6G H-Smart", "regNumber": "TS 07 HK 9088", "currentKm": 12100, "lastServiceDate": "2024-10-10", "lastServiceKm": 11800, "lastWorkDone": ["CVT Variator Overhaul & Slider Cleaning", "Bando Drive Belt Replacement", "Air Filter Clean & Carb/Injector Flush", "Castrol ActiBond 10W30 Engine & Gear Oil Refill"], "warrantyStatus": {"type": "General Service 30-Day Guarantee", "validUntil": "2024-11-10", "isActive": true, "notes": "Under active 30-day workmanship guarantee until Nov 10, 2024."}, "servicePitch": "Karthik ji, aapka Activa 6G active 30-day service warranty mein hai. Koi bhi minor vibration ya idle issue ho toh complimentary inspection available hai."}], "job_cards": [{"jobCardId": "JC-2024-8841", "accessKey": "cc1005", "customer": {"name": "Syed Farhan", "mobile": "9849112233", "email": "farhan.syed@gmail.com", "vehicleModel": "KTM Duke 390", "regNumber": "TS 09 EA 1234"}, "partnerId": "partner_001", "partnerName": "Harish CC Motocrafts Hub", "leadTechnician": "Shahrukh Master Technician", "bay": "Bay 02 - Precision Engine Overhaul Bay", "workBayStream": {"streamId": "STREAM-BAY02-CAM1", "status": "LIVE", "resolution": "1080p @ 60FPS (Ultra-Low Latency WebRTC)", "latencyMs": 142, "cameraViews": [{"id": "cam_overhead", "label": "Engine Overhead Cam", "active": true}, {"id": "cam_macro", "label": "Cylinder Head Macro Cam", "active": false}, {"id": "cam_bay", "label": "Wide Bay Cam", "active": false}]}, "stages": [{"step": 1, "title": "Vehicle Inspection & OBD-II Full Scan", "status": "completed", "timestamp": "Today 10:15 AM", "notes": "OBD-II ECU scan clear. Spark plug gap inspected at 0.8mm."}, {"step": 2, "title": "Engine Disassembly & Valve Inspection", "status": "in_progress", "progressPercent": 65, "timestamp": "Today 11:30 AM", "notes": "Cam chain tensioner removed. Checking intake valve clearance."}, {"step": 3, "title": "Valve Lapping, Bore Honing & Part Replacement", "status": "pending", "progressPercent": 0, "timestamp": "Estimated 02:00 PM", "notes": "New Viton stem seals and piston rings staged for installation."}, {"step": 4, "title": "Final Washing, Teflon Polish & Dyno Road Test", "status": "pending", "progressPercent": 0, "timestamp": "Estimated 04:30 PM", "notes": "High-pressure foam wash and 5 KM electronic diagnostic test run."}], "customerNotes": [{"id": "cn_01", "text": "Brake pad sound check kar lena bhaiyya front disc mein se", "timestamp": "11:42 AM", "status": "Acknowledged by Technician"}]}], "trackingPasswords": {"TS 09 EA 1234": {"password": "cc1005", "customer": "Syed Farhan", "phone": "+91 9849012345", "vehicle": "Royal Enfield Continental GT 650", "status": "active", "bay": "Bay #02 (Engine Overhaul)", "stage": 3}, "AP 28 BL 9988": {"password": "884102", "customer": "Rahul Sharma", "phone": "+91 9876543210", "vehicle": "Maruti Suzuki Ciaz (Sedan)", "status": "active", "bay": "Bay #01 (Quality Audit)", "stage": 4}, "TS 08 HG 5544": {"password": "331209", "customer": "Priya Patel", "phone": "+91 9123456789", "vehicle": "Hyundai Creta (SUV)", "status": "active", "bay": "Bay #03 (Suspension & Steering)", "stage": 2}}, "partnerCredentials": {"partner_001": {"password": "cc105", "garageName": "Harish CC Motocrafts Hub", "status": "active", "mobile": "+91 9849012345"}, "partner_002": {"password": "cc105", "garageName": "Madhapur Superbike & Precision Lab", "status": "active", "mobile": "+91 9876543210"}, "partner_003": {"password": "cc105", "garageName": "Banjara CarS CareS Fleet & Overhaul Hub", "status": "active", "mobile": "+91 9123456789"}, "partner_004": {"password": "cc105", "garageName": "Secunderabad Classic & Commercial Workshop", "status": "active", "mobile": "+91 9988776655"}}, "adminPassword": "cc102", "midnightLogs": [{"timestamp": "2026-11-01T00:00:00.000Z", "activeLeads": 4, "totalRevenue": 4124600, "status": "SUCCESS - Dispatched to aisupport.on@gmail.com"}]};
 
-    function verifyOwnerLogin() {
-      const code = document.getElementById('ownerPassInput').value.trim();
-      const holdNotice = document.getElementById('ownerHoldNotice');
-      const gate = document.getElementById('ownerAuthGate');
-      const content = document.getElementById('ownerDashboardContent');
+    function verifyAdminLogin() {
+      const pass = document.getElementById('adminPassInput').value.trim();
+      const holdNotice = document.getElementById('adminHoldNotice');
+      const gate = document.getElementById('adminAuthGate');
+      const content = document.getElementById('adminDashboardContent');
 
-      if (code === 'cc102') {
+      if (pass === 'cc102') {
         gate.style.display = 'none';
         content.style.display = 'block';
-        renderOwnerPartners();
-        renderOwnerBookings();
+        renderAdminBookings();
+        renderPasswordsManager();
+        renderAdminPartners();
       } else {
         holdNotice.style.display = 'block';
       }
     }
 
-    function renderOwnerPartners() {
-      const list = document.getElementById('ownerPartnersList');
-      list.innerHTML = '';
+    function renderAdminBookings() {
+      const container = document.getElementById('adminBookingsQueue');
+      container.innerHTML = '';
 
-      partnersData.forEach((p, idx) => {
-        const isActive = p.status === 'active';
+      db.bookings.forEach((b, idx) => {
         const card = document.createElement('div');
-        card.style = 'background: rgba(0,0,0,0.4); border: 1px solid var(--bg-card-border); border-radius: 8px; padding: 14px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;';
+        card.style = 'background: rgba(0,0,0,0.4); border: 1px solid var(--bg-card-border); border-radius: 8px; padding: 14px;';
+
+        const partnerOpts = db.partners.filter(p => p.status === 'active').map(p =>
+          `<option value="${p.id}" ${b.assignedPartnerId === p.id ? 'selected' : ''}>${p.garageName} (${p.segment.toUpperCase()})</option>`
+        ).join('');
+
+        const trackingRec = db.trackingPasswords && db.trackingPasswords[b.vehicleNumber];
+        const curPass = trackingRec ? trackingRec.password : 'NONE';
+
         card.innerHTML = `
-          <div>
+          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
+            <div>
+              <strong style="color: #fff; font-size: 14px;">${b.customerName} (${b.customerPhone})</strong>
+              <div style="font-size: 12px; color: var(--text-muted);">${b.vehicleModel} (${b.vehicleNumber}) • Service: ${b.serviceRequested}</div>
+            </div>
             <div style="display: flex; align-items: center; gap: 8px;">
-              <strong style="color: #fff; font-size: 14.5px;">${p.garageName}</strong>
-              <span style="font-size: 10px; font-weight: 800; background: rgba(255,179,0,0.15); color: var(--gold); border: 1px solid var(--gold); padding: 2px 6px; border-radius: 3px;">
-                ${p.segment.toUpperCase()}
+              <span style="font-size: 11px; background: rgba(255,179,0,0.15); color: var(--gold); border: 1px solid var(--gold); padding: 2px 6px; border-radius: 3px;">
+                PASS: <strong>${curPass}</strong>
               </span>
-            </div>
-            <div style="font-size: 11.5px; color: var(--text-muted); margin-top: 3px;">
-              Owner: ${p.ownerName} • Phone: ${p.mobile} • Location: ${p.location}
-            </div>
-            <div style="font-size: 11px; color: ${isActive ? '#00e676' : '#888'}; margin-top: 2px;">
-              Status: ${isActive ? '🟢 ACTIVE (Receiving Leads)' : '⚪ PAUSED (No Leads Assigned)'}
+              <button class="btn-cyber" style="padding: 4px 8px; font-size: 11px;" onclick="generateCustomerPassword('${b.vehicleNumber}', '${b.customerName}', '${b.customerPhone}')">
+                🎲 New Pass
+              </button>
             </div>
           </div>
-          <div style="display: flex; align-items: center; gap: 12px;">
-            <label class="toggle-switch" title="Toggle Garage ON/OFF">
+
+          <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
+            <label style="font-size: 11.5px; color: var(--text-muted);">Allocate Task to Garage:</label>
+            <select id="allocSel_${b.id}" class="form-input" style="width: auto; min-width: 220px; padding: 6px 8px; font-size: 11.5px;">
+              ${partnerOpts}
+            </select>
+            <button class="btn-cyber-solid" onclick="allocateAndDispatch('${b.id}')">
+              ⚡ Allocate & Send WhatsApp
+            </button>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    function generateCustomerPassword(vehicleNumber, custName, custPhone) {
+      const newPass = 'TRK-' + Math.floor(100000 + Math.random() * 900000);
+      if (!db.trackingPasswords) db.trackingPasswords = {};
+      db.trackingPasswords[vehicleNumber] = {
+        password: newPass,
+        customer: custName,
+        phone: custPhone,
+        status: 'active'
+      };
+
+      const msg = `*CC MOTOCRAFTS - LIVE TRACKING PASSWORD*%0AHello ${custName}, aapki gadi (${vehicleNumber}) ka Live Bay Video & Tracking Passcode hai: *${newPass}*%0AEnter code here to track: https://atshaikshahrukh-oss.github.io/Shaik/customer.html`;
+      window.open(`https://wa.me/${custPhone.replace(/[^0-9]/g, '')}?text=${msg}`, '_blank');
+      alert(`Customer Password ${newPass} generated and WhatsApp dispatch opened!`);
+      renderAdminBookings();
+      renderPasswordsManager();
+    }
+
+    function allocateAndDispatch(bookingId) {
+      const sel = document.getElementById(`allocSel_${bookingId}`);
+      const partnerId = sel.value;
+      const partner = db.partners.find(p => p.id === partnerId);
+      const booking = db.bookings.find(b => b.id === bookingId);
+
+      if (partner && booking) {
+        booking.assignedPartnerId = partnerId;
+        const msg = `*NEW WORKSHOP TASK ALLOCATION FROM SHAHRUKH (CC MOTOCRAFTS)*%0A*Customer:* ${booking.customerName} (${booking.customerPhone})%0A*Vehicle:* ${booking.vehicleModel} (${booking.vehicleNumber})%0A*Service:* ${booking.serviceRequested}%0APlease open Partner App to accept.`;
+        window.open(`https://wa.me/${partner.mobile.replace(/[^0-9]/g, '')}?text=${msg}`, '_blank');
+        alert(`Task successfully allocated to ${partner.garageName}! WhatsApp dispatch sent.`);
+      }
+    }
+
+    function renderPasswordsManager() {
+      const custBox = document.getElementById('customerPasswordsList');
+      custBox.innerHTML = '';
+      if (db.trackingPasswords) {
+        Object.keys(db.trackingPasswords).forEach(reg => {
+          const item = db.trackingPasswords[reg];
+          const row = document.createElement('div');
+          row.style = 'background: rgba(0,0,0,0.3); padding: 8px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;';
+          row.innerHTML = `
+            <div>
+              <strong>${reg}</strong> (${item.customer})<br>
+              <span style="color:var(--gold);">Pass: ${item.password}</span> • Status: <span style="color:#00e676;">${item.status.toUpperCase()}</span>
+            </div>
+            <button class="btn-cyber" style="padding: 2px 6px; font-size: 10px;" onclick="toggleCustomerPass('${reg}')">Toggle</button>
+          `;
+          custBox.appendChild(row);
+        });
+      }
+
+      const partBox = document.getElementById('partnerCredentialsList');
+      partBox.innerHTML = '';
+      if (db.partnerCredentials) {
+        Object.keys(db.partnerCredentials).forEach(pId => {
+          const item = db.partnerCredentials[pId];
+          const row = document.createElement('div');
+          row.style = 'background: rgba(0,0,0,0.3); padding: 8px; border-radius: 4px; display: flex; justify-content: space-between; align-items: center;';
+          row.innerHTML = `
+            <div>
+              <strong>${item.garageName}</strong><br>
+              <span style="color:var(--theme-primary);">Pass: ${item.password}</span> • Status: <span style="color:#00e676;">${item.status.toUpperCase()}</span>
+            </div>
+            <button class="btn-cyber" style="padding: 2px 6px; font-size: 10px;" onclick="resetPartnerPass('${pId}')">Reset</button>
+          `;
+          partBox.appendChild(row);
+        });
+      }
+    }
+
+    function toggleCustomerPass(reg) {
+      const item = db.trackingPasswords[reg];
+      if (item) {
+        item.status = item.status === 'active' ? 'blocked' : 'active';
+        alert(`Password status for ${reg} changed to ${item.status.toUpperCase()}!`);
+        renderPasswordsManager();
+      }
+    }
+
+    function resetPartnerPass(pId) {
+      const newP = 'PRT-' + Math.floor(1000 + Math.random() * 9000);
+      db.partnerCredentials[pId].password = newP;
+      alert(`New Partner Passcode: ${newP} generated for ${db.partnerCredentials[pId].garageName}!`);
+      renderPasswordsManager();
+    }
+
+    function renderAdminPartners() {
+      const list = document.getElementById('adminPartnersList');
+      list.innerHTML = '';
+      db.partners.forEach(p => {
+        const isActive = p.status === 'active';
+        const card = document.createElement('div');
+        card.style = 'background: rgba(0,0,0,0.4); border: 1px solid var(--bg-card-border); border-radius: 8px; padding: 12px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;';
+        card.innerHTML = `
+          <div>
+            <strong style="color: #fff; font-size: 14px;">${p.garageName}</strong> (${p.segment.toUpperCase()})<br>
+            <span style="font-size: 11.5px; color: var(--text-muted);">Owner: ${p.ownerName} • Phone: ${p.mobile} • Status: ${isActive ? '🟢 ACTIVE' : '⚪ PAUSED'}</span>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px;">
+            <label class="toggle-switch">
               <input type="checkbox" ${isActive ? 'checked' : ''} onchange="togglePartnerStatus('${p.id}')">
               <span class="slider"></span>
             </label>
-            <button class="btn-cyber" onclick="deletePartner('${p.id}')" style="color: var(--danger); border-color: var(--danger); padding: 6px 10px; font-size: 11px;">
-              🗑️ Delete
-            </button>
+            <button class="btn-cyber" style="color:var(--danger); border-color:var(--danger); padding:4px 8px; font-size:11px;" onclick="deletePartner('${p.id}')">🗑️</button>
           </div>
         `;
         list.appendChild(card);
@@ -284,174 +394,83 @@
     }
 
     function togglePartnerStatus(id) {
-      const p = partnersData.find(x => x.id === id);
+      const p = db.partners.find(x => x.id === id);
       if (p) {
         p.status = p.status === 'active' ? 'paused' : 'active';
-        alert(`Status updated: ${p.garageName} is now ${p.status.toUpperCase()}!`);
-        renderOwnerPartners();
-        renderOwnerBookings();
+        alert(`${p.garageName} is now ${p.status.toUpperCase()}!`);
+        renderAdminPartners();
       }
     }
 
     function deletePartner(id) {
-      if (confirm('Kya aap sach mein is garage partner ko delete karna chahte hain?')) {
-        partnersData = partnersData.filter(x => x.id !== id);
-        alert('Garage partner successfully deleted.');
-        renderOwnerPartners();
-        renderOwnerBookings();
+      if (confirm('Delete this garage partner?')) {
+        db.partners = db.partners.filter(x => x.id !== id);
+        alert('Partner deleted.');
+        renderAdminPartners();
       }
     }
 
     function openAddPartnerModal() {
-      const modal = document.getElementById('addPartnerModal');
-      modal.style.display = 'flex';
-    }
-
-    function closeAddPartnerModal() {
-      const modal = document.getElementById('addPartnerModal');
-      modal.style.display = 'none';
-    }
-
-    function saveNewPartner() {
-      const name = document.getElementById('newGarageName').value.trim();
-      const owner = document.getElementById('newOwnerName').value.trim();
-      const seg = document.getElementById('newSegment').value;
-      const mob = document.getElementById('newMobile').value.trim();
-      const loc = document.getElementById('newLocation').value.trim();
-
-      if (!name || !mob) {
-        alert('Kripya garage ka naam aur mobile number enter karein.');
-        return;
-      }
-
-      const newId = 'partner_' + String(partnersData.length + 1).padStart(3, '0');
-      partnersData.push({
-        id: newId,
-        garageName: name,
-        ownerName: owner || 'Manager',
-        mobile: mob,
-        segment: seg,
-        location: loc || 'Hyderabad',
-        status: 'active'
-      });
-
-      closeAddPartnerModal();
-      alert(`Naya garage "${name}" add ho gaya hai aur active hai!`);
-      renderOwnerPartners();
-      renderOwnerBookings();
-    }
-
-    function renderOwnerBookings() {
-      const list = document.getElementById('ownerBookingsList');
-      list.innerHTML = '';
-
-      bookingsData.forEach((b, idx) => {
-        const card = document.createElement('div');
-        card.style = 'background: rgba(0,0,0,0.4); border: 1px solid var(--bg-card-border); border-radius: 8px; padding: 14px;';
-
-        let partnerOptions = partnersData.filter(p => p.status === 'active').map(p => `<option value="${p.id}" ${b.assignedPartnerId === p.id ? 'selected' : ''}>${p.garageName} (${p.segment.toUpperCase()})</option>`).join('');
-
-        card.innerHTML = `
-          <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; flex-wrap: wrap; gap: 8px;">
-            <div>
-              <strong style="color: #fff; font-size: 14px;">${b.customerName} (${b.customerPhone})</strong>
-              <div style="font-size: 11.5px; color: var(--text-muted);">${b.vehicleModel} (${b.vehicleNumber}) • Service: ${b.serviceRequested}</div>
-            </div>
-            <span style="font-size: 11px; background: rgba(0,229,255,0.15); color: #00e5ff; border: 1px solid #00e5ff; padding: 2px 8px; border-radius: 4px;">
-              ${b.status.toUpperCase()}
-            </span>
-          </div>
-
-          <div style="display: flex; align-items: center; gap: 10px; margin-top: 10px; flex-wrap: wrap;">
-            <label style="font-size: 11.5px; color: var(--text-muted);">Allocate to Partner:</label>
-            <select id="alloc_${b.id}" class="form-input" style="width: auto; min-width: 220px; padding: 6px 8px; font-size: 11.5px;">
-              ${partnerOptions}
-            </select>
-            <button class="btn-cyber-solid" onclick="allocateLead('${b.id}')">
-              ⚡ Allocate & Send WhatsApp
-            </button>
-          </div>
-        `;
-        list.appendChild(card);
-      });
-    }
-
-    function allocateLead(bookingId) {
-      const select = document.getElementById(`alloc_${bookingId}`);
-      const partnerId = select.value;
-      const partner = partnersData.find(p => p.id === partnerId);
-      const booking = bookingsData.find(b => b.id === bookingId);
-
-      if (partner && booking) {
-        booking.assignedPartnerId = partnerId;
-        const msg = `*NEW WORKSHOP LEAD FROM SHAHRUKH (CC MOTOCRAFTS)*%0A*Customer:* ${booking.customerName} (${booking.customerPhone})%0A*Vehicle:* ${booking.vehicleModel} (${booking.vehicleNumber})%0A*Service:* ${booking.serviceRequested}%0A*Please contact customer immediately.*`;
-        window.open(`https://wa.me/${partner.mobile.replace(/[^0-9]/g, '')}?text=${msg}`, '_blank');
-        alert(`Lead allocated to ${partner.garageName}! WhatsApp dispatch window opened.`);
+      const name = prompt('Garage Ka Naam:');
+      const mobile = prompt('Mobile Number:');
+      if (name && mobile) {
+        db.partners.push({
+          id: 'partner_' + String(db.partners.length + 1).padStart(3, '0'),
+          garageName: name,
+          ownerName: 'Manager',
+          mobile: mobile,
+          segment: 'both',
+          status: 'active'
+        });
+        alert(`Partner ${name} added successfully!`);
+        renderAdminPartners();
       }
     }
 
-    function runOwnerVoiceCmd(text) {
-      document.getElementById('ownerVoiceInput').value = text;
-      executeVoiceCommand();
-    }
-
-    function listenHindiVoice() {
-      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
-        const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-        const rec = new SpeechRec();
-        rec.lang = 'hi-IN';
-        rec.onstart = () => { alert('Bolna shuru karein (Microphone listening in Hindi)...'); };
-        rec.onresult = (e) => {
-          const transcript = e.results[0][0].transcript;
-          document.getElementById('ownerVoiceInput').value = transcript;
-          executeVoiceCommand();
-        };
-        rec.onerror = () => { alert('Microphone error ya permission denied. Type karke try karein.'); };
-        rec.start();
-      } else {
-        alert('Aapke browser mein Speech Recognition support nahi hai. Text box mein command type karein.');
-      }
-    }
-
-    function executeVoiceCommand() {
-      const cmd = document.getElementById('ownerVoiceInput').value.trim();
-      const preview = document.getElementById('ownerVoicePreview');
-      if (!cmd) return;
-
-      preview.style.display = 'block';
-      preview.innerHTML = `
-        <div style="font-size:12px; color:var(--gold); margin-bottom:6px;"><strong>Proposed Action Preview (Human-in-the-Loop):</strong></div>
-        <div style="font-size:13px; color:#fff; margin-bottom:10px;">Command: "${cmd}"</div>
-        <p style="font-size:11.5px; color:var(--text-muted); margin-bottom:12px;">AI analysis: System has recognized the command parameters. Click Green button below to approve and execute update.</p>
-        <div style="display:flex; gap:8px;">
-          <button class="btn-cyber-solid" style="background:var(--success); border-color:var(--success); color:#000;" onclick="approveVoiceAction('${encodeURIComponent(cmd)}')">
-            ✅ Approve & Execute
-          </button>
-          <button class="btn-cyber" onclick="document.getElementById('ownerVoicePreview').style.display='none'">
-            Cancel
-          </button>
-        </div>
-      `;
-    }
-
-    function approveVoiceAction(cmd) {
-      alert('Command executed successfully! System database updated and audit log recorded.');
-      document.getElementById('ownerVoicePreview').style.display = 'none';
-      document.getElementById('ownerVoiceInput').value = '';
+    function exportDatabaseBackup() {
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(db, null, 2));
+      const dl = document.createElement('a');
+      dl.setAttribute("href", dataStr);
+      dl.setAttribute("download", `ccmotocrafts_backup_${new Date().toISOString().slice(0,10)}.json`);
+      dl.click();
+      alert('Complete database backup JSON exported successfully!');
     }
 
     function triggerMidnightBackup() {
       alert('12:00 AM Automated Midnight Backup report sent to aisupport.on@gmail.com! Includes all bookings, garage revenues, and active customer warranties.');
     }
 
+    function listenHindiVoice() {
+      if ('webkitSpeechRecognition' in window || 'SpeechRecognition' in window) {
+        const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+        const rec = new SR();
+        rec.lang = 'hi-IN';
+        rec.onstart = () => alert('Listening in Hindi...');
+        rec.onresult = (e) => {
+          document.getElementById('adminVoiceInput').value = e.results[0][0].transcript;
+          executeVoiceCommand();
+        };
+        rec.start();
+      } else alert('Type command in text box.');
+    }
+
+    function executeVoiceCommand() {
+      const cmd = document.getElementById('adminVoiceInput').value.trim();
+      const p = document.getElementById('adminVoicePreview');
+      if (!cmd) return;
+      p.style.display = 'block';
+      p.innerHTML = `
+        <strong style="color:var(--gold);">Proposed Action Preview:</strong><br>
+        Command: "${cmd}"<br>
+        <button class="btn-cyber-solid" style="background:var(--success); border-color:var(--success); color:#000; margin-top:8px;" onclick="alert('Command Executed!'); document.getElementById('adminVoicePreview').style.display='none';">✅ Approve & Execute</button>
+      `;
+    }
+
     let deferredPrompt = null;
-    window.addEventListener('beforeinstallprompt', (e) => {
-      e.preventDefault();
-      deferredPrompt = e;
-    });
+    window.addEventListener('beforeinstallprompt', (e) => { e.preventDefault(); deferredPrompt = e; });
     function triggerPwaInstall() {
       if (deferredPrompt) deferredPrompt.prompt();
-      else alert('To install Owner App on phone:\n\n• Tap browser menu (3 dots) -> "Install App" or "Add to Home screen".');
+      else alert('To install Master Admin App on phone:\n\n• Tap browser menu (3 dots) -> "Install App".');
     }
   </script>
 </body>

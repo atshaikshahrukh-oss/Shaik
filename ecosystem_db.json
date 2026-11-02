@@ -1,0 +1,454 @@
+{
+  "bookings": [
+    {
+      "bookingId": "BK-2024-901",
+      "createdAt": "2024-10-31 09:30 AM",
+      "customer": {
+        "name": "Syed Farhan",
+        "mobile": "9849112233",
+        "email": "farhan.syed@gmail.com",
+        "vehicleType": "2w",
+        "vehicleModel": "KTM Duke 390",
+        "regNumber": "TS 09 EA 1234"
+      },
+      "servicePackage": "Stage-3 Precision Engine Rebuild & Valve Lapping",
+      "serviceType": "engine_rebuild",
+      "partnerId": "partner_001",
+      "partnerName": "Harish CC Motocrafts Hub (Gachibowli)",
+      "assignedBay": "Bay 02 - Precision Engine Overhaul Bay",
+      "assignedTechnician": "Shahrukh Master Technician",
+      "currentStage": "Step 2: Engine Disassembly in Progress",
+      "stageIndex": 2,
+      "progressPercent": 65,
+      "currentKm": 20400,
+      "lastServiceKm": 18500,
+      "estimatedDelivery": "Today, 05:30 PM",
+      "paymentStatus": "Paid Advance (\u20b95,000)",
+      "totalEstimate": 8500,
+      "doorstepPickup": {
+        "isVipFree": true,
+        "address": "Telecom Nagar, Gachibowli, Hyderabad - 500032",
+        "driverAssigned": "Ramu (Flatbed Transporter #04)"
+      },
+      "warrantyStatus": {
+        "type": "1-Year Engine Rebuild Overhaul Warranty",
+        "active": true,
+        "breakInDueKm": 21150,
+        "rules": "Mandatory first service at 500-750 KM (15-30 days)"
+      }
+    },
+    {
+      "bookingId": "BK-2024-902",
+      "createdAt": "2024-10-31 10:15 AM",
+      "customer": {
+        "name": "Dr. Ananya Rao",
+        "mobile": "9123445566",
+        "email": "ananya.rao@apollo.org",
+        "vehicleType": "4w",
+        "vehicleModel": "Hyundai Creta 1.5 SX(O)",
+        "regNumber": "TS 08 FG 5541"
+      },
+      "servicePackage": "Mandatory First 700 KM Overhaul Checkup & Oil Flush",
+      "serviceType": "engine_rebuild",
+      "partnerId": "partner_003",
+      "partnerName": "Banjara CarS CareS Fleet & Overhaul Hub",
+      "assignedBay": "Bay 04 - Heavy Commercial & Car Lift Bay",
+      "assignedTechnician": "Suresh Senior Overhaul Specialist",
+      "currentStage": "Step 3: Fresh Synthetic Oil Refill & Torque Verification",
+      "stageIndex": 3,
+      "progressPercent": 80,
+      "currentKm": 34200,
+      "lastServiceKm": 33500,
+      "estimatedDelivery": "Today, 02:00 PM",
+      "paymentStatus": "Pending (Post Delivery)",
+      "totalEstimate": 3800,
+      "doorstepPickup": {
+        "isVipFree": true,
+        "address": "Road No. 12, Banjara Hills, Hyderabad - 500034",
+        "driverAssigned": "Dedicated Driver (Kiran)"
+      },
+      "warrantyStatus": {
+        "type": "1-Year Engine Overhaul Warranty",
+        "active": true,
+        "notes": "Break-in service underway to lock in 1-Year Crank & Cylinder Bore warranty"
+      }
+    },
+    {
+      "bookingId": "BK-2024-903",
+      "createdAt": "2024-10-31 11:00 AM",
+      "customer": {
+        "name": "Karthik Varma",
+        "mobile": "9700123456",
+        "email": "karthik.varma@techmahindra.com",
+        "vehicleType": "2w",
+        "vehicleModel": "Honda Activa 6G H-Smart",
+        "regNumber": "TS 07 HK 9088"
+      },
+      "servicePackage": "CVT Variator Overhaul & Periodic Transmission Tune",
+      "serviceType": "general_service",
+      "partnerId": "partner_001",
+      "partnerName": "Harish CC Motocrafts Hub (Gachibowli)",
+      "assignedBay": "Bay 01 - Quick CVT & Periodic Bay",
+      "assignedTechnician": "Harish Kumar",
+      "currentStage": "Step 1: Vehicle Inspection & CVT Teardown",
+      "stageIndex": 1,
+      "progressPercent": 30,
+      "currentKm": 12100,
+      "lastServiceKm": 11800,
+      "estimatedDelivery": "Today, 03:30 PM",
+      "paymentStatus": "Paid Online (\u20b92,450)",
+      "totalEstimate": 2450,
+      "doorstepPickup": {
+        "isVipFree": true,
+        "address": "Hi-Tech City, Madhapur, Hyderabad - 500081",
+        "driverAssigned": "Doorstep Pickup Completed"
+      },
+      "warrantyStatus": {
+        "type": "30-Day General Service Guarantee",
+        "active": true,
+        "notes": "Covers variator roller tuning & drive belt assembly"
+      }
+    },
+    {
+      "bookingId": "BK-2024-904",
+      "createdAt": "2024-10-31 11:45 AM",
+      "customer": {
+        "name": "Vikram Singh",
+        "mobile": "9988776655",
+        "email": "vikram.ccmoto@gmail.com",
+        "vehicleType": "4w",
+        "vehicleModel": "Mahindra Thar 2.2 CRDe 4x4",
+        "regNumber": "TS 09 EU 8812"
+      },
+      "servicePackage": "ECU Diagnostics, CAN-Bus Ripple Test & Turbo Overhaul",
+      "serviceType": "engine_rebuild",
+      "partnerId": "partner_004",
+      "partnerName": "Secunderabad Classic & Commercial Workshop",
+      "assignedBay": "Bay 03 - 4x4 Dyno & Diagnostics Bay",
+      "assignedTechnician": "Suresh Senior Overhaul Specialist",
+      "currentStage": "Step 1: Vehicle Inspection & OBD Scan Completed",
+      "stageIndex": 1,
+      "progressPercent": 25,
+      "currentKm": 45800,
+      "lastServiceKm": 43200,
+      "estimatedDelivery": "Tomorrow, 12:00 PM",
+      "paymentStatus": "Advance Paid (\u20b910,000)",
+      "totalEstimate": 18500,
+      "doorstepPickup": {
+        "isVipFree": true,
+        "address": "Sindhi Colony, Secunderabad - 500003",
+        "driverAssigned": "Flatbed Hauler #02"
+      },
+      "warrantyStatus": {
+        "type": "1-Year Engine Rebuild Warranty",
+        "active": true,
+        "notes": "Turbocharger boost pressure & intercooler circuit covered"
+      }
+    }
+  ],
+  "partners": [
+    {
+      "id": "partner_001",
+      "garageName": "Harish CC Motocrafts Hub",
+      "ownerName": "Harish Kumar",
+      "mobile": "+91 9849012345",
+      "email": "harish.ccmoto@gmail.com",
+      "location": "Plot 42, Telecom Nagar, Gachibowli, Hyderabad",
+      "pincode": "500032",
+      "segment": "both",
+      "gstEnabled": true,
+      "gstNumber": "36AABCC1234F1Z5",
+      "tradeLicenseEnabled": true,
+      "tradeLicenseNo": "GHMC/TL/2024/98712",
+      "pollutionCertEnabled": true,
+      "pollutionCertNo": "TS/PCB/DIAG/8841",
+      "status": "active",
+      "joinedDate": "2024-01-15",
+      "totalInvoices": 142,
+      "totalRevenue": 845200
+    },
+    {
+      "id": "partner_002",
+      "garageName": "Madhapur Superbike & Precision Lab",
+      "ownerName": "Mohammed Rizwan",
+      "mobile": "+91 9876543210",
+      "email": "rizwan.superbikes@gmail.com",
+      "location": "Near Durgam Cheruvu Metro, Madhapur, Hyderabad",
+      "pincode": "500081",
+      "segment": "2w",
+      "gstEnabled": true,
+      "gstNumber": "36XYZPK9876L2D9",
+      "tradeLicenseEnabled": true,
+      "tradeLicenseNo": "GHMC/TL/2023/45129",
+      "pollutionCertEnabled": false,
+      "pollutionCertNo": "",
+      "status": "active",
+      "joinedDate": "2024-03-10",
+      "totalInvoices": 98,
+      "totalRevenue": 512400
+    },
+    {
+      "id": "partner_003",
+      "garageName": "Banjara CarS CareS Fleet & Overhaul Hub",
+      "ownerName": "Suresh Reddy",
+      "mobile": "+91 9123456789",
+      "email": "suresh.cars@gmail.com",
+      "location": "Road No. 12, Banjara Hills, Hyderabad",
+      "pincode": "500034",
+      "segment": "4w",
+      "gstEnabled": true,
+      "gstNumber": "36AAECR5542M1Z0",
+      "tradeLicenseEnabled": true,
+      "tradeLicenseNo": "GHMC/TL/2022/88214",
+      "pollutionCertEnabled": true,
+      "pollutionCertNo": "TS/PCB/AUTO/3312",
+      "status": "active",
+      "joinedDate": "2023-11-20",
+      "totalInvoices": 210,
+      "totalRevenue": 2450000
+    },
+    {
+      "id": "partner_004",
+      "garageName": "Secunderabad Classic & Commercial Workshop",
+      "ownerName": "Vikram Singh",
+      "mobile": "+91 9988776655",
+      "email": "vikram.ccmoto@gmail.com",
+      "location": "MG Road, Secunderabad, Telangana",
+      "pincode": "500003",
+      "segment": "both",
+      "gstEnabled": false,
+      "gstNumber": "",
+      "tradeLicenseEnabled": true,
+      "tradeLicenseNo": "GHMC/TL/2024/11029",
+      "pollutionCertEnabled": true,
+      "pollutionCertNo": "TS/PCB/DIAG/4491",
+      "status": "active",
+      "joinedDate": "2024-06-01",
+      "totalInvoices": 64,
+      "totalRevenue": 312000
+    }
+  ],
+  "customers": [
+    {
+      "id": "cust_101",
+      "name": "Syed Farhan",
+      "mobile": "+91 9849112233",
+      "email": "farhan.syed@gmail.com",
+      "vehicleType": "2w",
+      "vehicleModel": "KTM Duke 390",
+      "regNumber": "TS 09 EA 1234",
+      "currentKm": 20400,
+      "lastServiceDate": "2024-08-15",
+      "lastServiceKm": 18500,
+      "lastWorkDone": [
+        "Motul 300V 15W50 Full Synthetic Oil Change",
+        "KTM OEM Oil Filter & O-Ring Replacement",
+        "Front Brembo Brake Pad Replacement",
+        "Radiator Coolant Flush & De-aerate"
+      ],
+      "warrantyStatus": {
+        "type": "General Service 30-Day Guarantee",
+        "validUntil": "2024-09-15",
+        "isActive": false,
+        "notes": "Service interval reached: 1,900 KM elapsed since last maintenance (Recommended interval: 1,800 - 2,000 KM)."
+      },
+      "servicePitch": "Aapka last service 15 August ko 18,500 KM par hua tha. Aaj 20,400 KM ho chuke hain. Aapka 1,900 KM maintenance interval ho gaya hai! Engine protection ke liye oil and filter checkup zaroori hai."
+    },
+    {
+      "id": "cust_102",
+      "name": "Dr. Ananya Rao",
+      "mobile": "+91 9123445566",
+      "email": "ananya.rao@apollo.org",
+      "vehicleType": "4w",
+      "vehicleModel": "Hyundai Creta 1.5 SX(O)",
+      "regNumber": "TS 08 FG 5541",
+      "currentKm": 34200,
+      "lastServiceDate": "2024-09-28",
+      "lastServiceKm": 33500,
+      "lastWorkDone": [
+        "Stage-3 Engine Rebuild & Cylinder Bore Honing",
+        "Crankshaft Micropolish & New Main Bearings",
+        "Intake & Exhaust Valve Lapping with New Viton Stem Seals",
+        "Synthetic Break-In Oil Refill (5W-30)"
+      ],
+      "warrantyStatus": {
+        "type": "1-Year Engine Overhaul Warranty",
+        "validUntil": "2025-09-28",
+        "isActive": true,
+        "firstServiceDue": "Between 34,000 KM to 34,250 KM (Due Now!)",
+        "notes": "MANDATORY FIRST SERVICE REQUIRED NOW (700 KM run since overhaul). Engine oil and metal flush needed to maintain 1-year warranty."
+      },
+      "servicePitch": "Doctor sahiba, aapki Creta ka engine overhaul 33,500 KM par hua tha. Ab gadi 700 KM chal chuki hai. CC Motocrafts strict warranty rule ke hisab se 500-750 KM first checkup zaroori hai taaki aapka 1-year engine warranty safe rahe!"
+    },
+    {
+      "id": "cust_103",
+      "name": "Karthik Varma",
+      "mobile": "+91 9700123456",
+      "email": "karthik.varma@techmahindra.com",
+      "vehicleType": "2w",
+      "vehicleModel": "Honda Activa 6G H-Smart",
+      "regNumber": "TS 07 HK 9088",
+      "currentKm": 12100,
+      "lastServiceDate": "2024-10-10",
+      "lastServiceKm": 11800,
+      "lastWorkDone": [
+        "CVT Variator Overhaul & Slider Cleaning",
+        "Bando Drive Belt Replacement",
+        "Air Filter Clean & Carb/Injector Flush",
+        "Castrol ActiBond 10W30 Engine & Gear Oil Refill"
+      ],
+      "warrantyStatus": {
+        "type": "General Service 30-Day Guarantee",
+        "validUntil": "2024-11-10",
+        "isActive": true,
+        "notes": "Under active 30-day workmanship guarantee until Nov 10, 2024."
+      },
+      "servicePitch": "Karthik ji, aapka Activa 6G active 30-day service warranty mein hai. Koi bhi minor vibration ya idle issue ho toh complimentary inspection available hai."
+    }
+  ],
+  "job_cards": [
+    {
+      "jobCardId": "JC-2024-8841",
+      "accessKey": "cc1005",
+      "customer": {
+        "name": "Syed Farhan",
+        "mobile": "9849112233",
+        "email": "farhan.syed@gmail.com",
+        "vehicleModel": "KTM Duke 390",
+        "regNumber": "TS 09 EA 1234"
+      },
+      "partnerId": "partner_001",
+      "partnerName": "Harish CC Motocrafts Hub",
+      "leadTechnician": "Shahrukh Master Technician",
+      "bay": "Bay 02 - Precision Engine Overhaul Bay",
+      "workBayStream": {
+        "streamId": "STREAM-BAY02-CAM1",
+        "status": "LIVE",
+        "resolution": "1080p @ 60FPS (Ultra-Low Latency WebRTC)",
+        "latencyMs": 142,
+        "cameraViews": [
+          {
+            "id": "cam_overhead",
+            "label": "Engine Overhead Cam",
+            "active": true
+          },
+          {
+            "id": "cam_macro",
+            "label": "Cylinder Head Macro Cam",
+            "active": false
+          },
+          {
+            "id": "cam_bay",
+            "label": "Wide Bay Cam",
+            "active": false
+          }
+        ]
+      },
+      "stages": [
+        {
+          "step": 1,
+          "title": "Vehicle Inspection & OBD-II Full Scan",
+          "status": "completed",
+          "timestamp": "Today 10:15 AM",
+          "notes": "OBD-II ECU scan clear. Spark plug gap inspected at 0.8mm."
+        },
+        {
+          "step": 2,
+          "title": "Engine Disassembly & Valve Inspection",
+          "status": "in_progress",
+          "progressPercent": 65,
+          "timestamp": "Today 11:30 AM",
+          "notes": "Cam chain tensioner removed. Checking intake valve clearance."
+        },
+        {
+          "step": 3,
+          "title": "Valve Lapping, Bore Honing & Part Replacement",
+          "status": "pending",
+          "progressPercent": 0,
+          "timestamp": "Estimated 02:00 PM",
+          "notes": "New Viton stem seals and piston rings staged for installation."
+        },
+        {
+          "step": 4,
+          "title": "Final Washing, Teflon Polish & Dyno Road Test",
+          "status": "pending",
+          "progressPercent": 0,
+          "timestamp": "Estimated 04:30 PM",
+          "notes": "High-pressure foam wash and 5 KM electronic diagnostic test run."
+        }
+      ],
+      "customerNotes": [
+        {
+          "id": "cn_01",
+          "text": "Brake pad sound check kar lena bhaiyya front disc mein se",
+          "timestamp": "11:42 AM",
+          "status": "Acknowledged by Technician"
+        }
+      ]
+    }
+  ],
+  "trackingPasswords": {
+    "TS 09 EA 1234": {
+      "password": "cc1005",
+      "customer": "Syed Farhan",
+      "phone": "+91 9849012345",
+      "vehicle": "Royal Enfield Continental GT 650",
+      "status": "active",
+      "bay": "Bay #02 (Engine Overhaul)",
+      "stage": 3
+    },
+    "AP 28 BL 9988": {
+      "password": "884102",
+      "customer": "Rahul Sharma",
+      "phone": "+91 9876543210",
+      "vehicle": "Maruti Suzuki Ciaz (Sedan)",
+      "status": "active",
+      "bay": "Bay #01 (Quality Audit)",
+      "stage": 4
+    },
+    "TS 08 HG 5544": {
+      "password": "331209",
+      "customer": "Priya Patel",
+      "phone": "+91 9123456789",
+      "vehicle": "Hyundai Creta (SUV)",
+      "status": "active",
+      "bay": "Bay #03 (Suspension & Steering)",
+      "stage": 2
+    }
+  },
+  "partnerCredentials": {
+    "partner_001": {
+      "password": "cc105",
+      "garageName": "Harish CC Motocrafts Hub",
+      "status": "active",
+      "mobile": "+91 9849012345"
+    },
+    "partner_002": {
+      "password": "cc105",
+      "garageName": "Madhapur Superbike & Precision Lab",
+      "status": "active",
+      "mobile": "+91 9876543210"
+    },
+    "partner_003": {
+      "password": "cc105",
+      "garageName": "Banjara CarS CareS Fleet & Overhaul Hub",
+      "status": "active",
+      "mobile": "+91 9123456789"
+    },
+    "partner_004": {
+      "password": "cc105",
+      "garageName": "Secunderabad Classic & Commercial Workshop",
+      "status": "active",
+      "mobile": "+91 9988776655"
+    }
+  },
+  "adminPassword": "cc102",
+  "midnightLogs": [
+    {
+      "timestamp": "2026-11-01T00:00:00.000Z",
+      "activeLeads": 4,
+      "totalRevenue": 4124600,
+      "status": "SUCCESS - Dispatched to aisupport.on@gmail.com"
+    }
+  ]
+}

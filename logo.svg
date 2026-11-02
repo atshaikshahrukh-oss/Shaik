@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <radialGradient id="metalRim" cx="35%" cy="30%" r="70%">
+      <stop offset="0%" stop-color="#ffffff"/>
+      <stop offset="30%" stop-color="#cfd8dc"/>
+      <stop offset="70%" stop-color="#78909c"/>
+      <stop offset="100%" stop-color="#37474f"/>
+    </radialGradient>
+    <radialGradient id="coreBg" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#141c28"/>
+      <stop offset="85%" stop-color="#080e18"/>
+      <stop offset="100%" stop-color="#020408"/>
+    </radialGradient>
+    <linearGradient id="rainbowSpectrum" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ff3366"/>
+      <stop offset="25%" stop-color="#ff9100"/>
+      <stop offset="50%" stop-color="#ffea00"/>
+      <stop offset="75%" stop-color="#00e5ff"/>
+      <stop offset="100%" stop-color="#7c4dff"/>
+    </linearGradient>
+    <filter id="metalDropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#000000" flood-opacity="0.8"/>
+    </filter>
+  </defs>
+
+  <!-- Outer Shadow & Base Rim -->
+  <circle cx="256" cy="256" r="236" fill="url(#metalRim)" filter="url(#metalDropShadow)"/>
+  <circle cx="256" cy="256" r="222" fill="#0c121d" stroke="#546e7a" stroke-width="2"/>
+
+  <!-- Rainbow Precision Spectrum Arc (Top Half) -->
+  <path d="M 66 256 A 190 190 0 0 1 446 256" fill="none" stroke="url(#rainbowSpectrum)" stroke-width="22" stroke-linecap="round"/>
+
+  <!-- Inner Dark Beveled Core -->
+  <circle cx="256" cy="256" r="172" fill="url(#coreBg)" stroke="url(#metalRim)" stroke-width="8"/>
+
+  <!-- Center Gear -->
+  <g fill="none" stroke="url(#metalRim)" stroke-width="12" opacity="0.85">
+    <circle cx="256" cy="256" r="62"/>
+    <path d="M 256 182 L 256 196 M 256 316 L 256 330 M 182 256 L 196 256 M 316 256 L 330 256 M 204 204 L 214 214 M 298 298 L 308 308 M 204 308 L 214 298 M 298 214 L 308 204" stroke-width="16" stroke-linecap="round"/>
+  </g>
+
+  <!-- Crossed Wrenches (Iconic Mechanical Mastery) -->
+  <g fill="url(#metalRim)" filter="url(#metalDropShadow)">
+    <!-- Wrench 1 (Diagonal Top-Left to Bottom-Right) -->
+    <path d="M 170 140 C 185 125, 215 130, 225 145 L 210 160 C 205 155, 195 155, 190 160 L 290 290 C 295 285, 305 285, 310 290 L 325 275 C 340 285, 345 315, 330 330 C 315 345, 285 340, 275 325 L 290 310 C 295 315, 305 315, 310 310 L 210 180 C 205 185, 195 185, 190 180 L 175 195 C 160 185, 155 155, 170 140 Z"/>
+    <!-- Wrench 2 (Diagonal Top-Right to Bottom-Left) -->
+    <path d="M 342 140 C 327 125, 297 130, 287 145 L 302 160 C 307 155, 317 155, 322 160 L 222 290 C 217 285, 207 285, 202 290 L 187 275 C 172 285, 167 315, 182 330 C 197 345, 227 340, 237 325 L 222 310 C 217 315, 207 315, 202 310 L 302 180 C 307 185, 317 185, 322 180 L 337 195 C 352 185, 357 155, 342 140 Z"/>
+    <circle cx="256" cy="235" r="18" fill="#141c28" stroke="url(#metalRim)" stroke-width="6"/>
+  </g>
+
+  <!-- Embossed Bottom Text 'CC CRAFTS' -->
+  <text x="256" y="415" font-family="'Segoe UI', -apple-system, sans-serif" font-size="34" font-weight="900" fill="url(#metalRim)" text-anchor="middle" letter-spacing="5">
+    CC CRAFTS
+  </text>
+  <text x="256" y="445" font-family="'SF Mono', Consolas, monospace" font-size="12" font-weight="800" fill="#00e5ff" text-anchor="middle" letter-spacing="3">
+    AI ENGINE LABS
+  </text>
+</svg>

@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>CC MOTOCRAFTS | Operations & Marketing Manager Panel (App 3)</title>
   <meta name="theme-color" content="#00b0ff">
-  <link rel="manifest" href="manifest.json">
+  <link rel="manifest" href="manifest-admin.json">
   <style>
     :root {
       --theme-primary: #00b0ff;
@@ -146,8 +146,8 @@
       const gate = document.getElementById('managerAuthGate');
       const content = document.getElementById('managerDashboardContent');
 
-      // Staff passcode: cc103 or cc102
-      if (pass === 'cc103' || pass === 'cc102') {
+      // Prototype staff passcode only. Production authentication must be server-side.
+      if (pass === 'cc103') {
         gate.style.display = 'none';
         content.style.display = 'block';
         renderMgrBookings();

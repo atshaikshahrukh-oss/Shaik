@@ -1,0 +1,19 @@
+{
+  "name": "CC MOTOCRAFTS | Operations Manager",
+  "short_name": "CC Ops",
+  "description": "Operations manager interface for CC Motocrafts.",
+  "start_url": "admin.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#060b13",
+  "theme_color": "#00b0ff",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "assets/app-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    }
+  ]
+}

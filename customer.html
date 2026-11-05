@@ -264,6 +264,25 @@ function setCustomerCategory(cat) {
     const b = document.getElementById('cat-btn-' + k);
     if (b) b.className = (k === activeCategory) ? 'primary' : '';
   });
+  if (activeCategory === '2w') {
+    document.getElementById('f-brand').value = 'KTM';
+    document.getElementById('f-model').value = 'Duke 390 BS6 (100cc–2500cc)';
+    document.getElementById('f-reg').value = 'TS09-2W-3900';
+    document.getElementById('f-complaint').placeholder = 'Describe 2W tappet noise, CVT belt slip, ECU check light, or fork alignment…';
+  } else if (activeCategory === '4w') {
+    document.getElementById('f-brand').value = 'Hyundai';
+    document.getElementById('f-model').value = 'Creta 1.5 DCT Automatic';
+    document.getElementById('f-reg').value = 'TS07-4W-8899';
+    document.getElementById('f-complaint').placeholder = 'Describe 4W AC cooling drop, automatic gearbox jerk, 3D alignment, or flatbed recovery…';
+  } else {
+    document.getElementById('f-brand').value = 'Daikin / Urban Home';
+    document.getElementById('f-model').value = '1.5 Ton Split Inverter AC';
+    document.getElementById('f-reg').value = 'HOME-HYD-01';
+    document.getElementById('f-complaint').placeholder = 'Describe AC jet wash, CCTV setup, RO water purifier, plumbing, or interior requirement…';
+  }
+  populateCustomerStreamDropdown();
+  renderCustomerStream();
+  renderParking();
 
   const chatBox = document.getElementById('cust-chat-box');
   chatBox.innerHTML = `
@@ -334,6 +353,7 @@ function handleCustomerBookingSubmit(e) {
   };
 
   st.bookings.unshift(newBooking);
+  if (typeof ccmApiCall === 'function') ccmApiCall('booking.create', newBooking);
   const links = buildDispatchLinks(newBooking);
 
   st.outboxLogs.unshift({
@@ -375,7 +395,11 @@ function populateCustomerStreamDropdown(selectedCode, selectedPass) {
   const st = loadState();
   const sel = document.getElementById('cust-booking-select');
   if (!sel) return;
-  sel.innerHTML = st.bookings.map(b => `<option value="${b.booking_code}" data-pass="${b.tracking_passcode}">${b.booking_code} — ${b.brand} ${b.model} (${b.customer_name})</option>`).join('');
+  const domFilter = activeCategory === '4w' ? '4w' : '2w';
+  const filtered = st.bookings.filter(b => b.vehicle_type === domFilter);
+  const list = filtered.length ? filtered : st.bookings;
+  sel.innerHTML = list.map(b => `<option value="${b.booking_code}" data-pass="${b.tracking_passcode}">[${b.vehicle_type.toUpperCase()} ONLY] ${b.booking_code} — ${b.brand} ${b.model} (${b.customer_name})</option>`).join('');
+  if (!selectedPass && list[0]) document.getElementById('cust-passcode-input').value = list[0].tracking_passcode;
   if (selectedCode) sel.value = selectedCode;
   if (selectedPass) document.getElementById('cust-passcode-input').value = selectedPass;
 }
@@ -473,6 +497,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (!q) return;
     appendChatMessage('user', `<strong>You:</strong> ${q}`);
     const domain = activeCategory === '4w' ? '4w' : '2w';
+    if (typeof ccmApiCall === 'function') ccmApiCall('ai.diagnose', { vehicleType: domain, message: q });
     const res = runIsolatedMasterAI(domain, q, {
       pincode: document.getElementById('f-pin').value,
       address: document.getElementById('f-addr').value

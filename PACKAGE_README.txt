@@ -1,2 +1,1 @@
-ZIP 1: Global Website & Customer App
-Files: index.html, customer.html, manifest.json, app.js, app.css, and 35 portfolio/transit assets.
+Phase 1 (ZIP 1): Global Website & Customer App — Fixed API 400 payload/headers, strict 2W (100cc-2500cc) vs 4W (Cars/SUVs/Fleet) isolation, all 47 WA0000-WA0046 custom cards in assets/portfolio/ & root, Shaik Mujahid Mastery Certificate (WA0004.jpg), VIP Transit Carousel (WA0027.jpg), Smart 5-Star Review Router, Track My Gadi, and 1-Year Digital Warranty Card.
